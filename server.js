@@ -6,11 +6,12 @@ const apiauth = require("./middlewares/apiauth");
 
 const userRoutes = require('./routes/user')
 const expenseRoutes = require('./routes/expense')
+const homeRoutes = require('./routes/home')
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to nodeapp application." });
-  console.log("hiii")
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to nodeapp application." });
+//   console.log("hiii")
+// });
 const db = require('./models')
 const User = db.User
 const Record = db.Record
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/users', userRoutes)
 app.use('/expenses', apiauth, expenseRoutes)
+app.use('/', apiauth, homeRoutes)
 
 
 

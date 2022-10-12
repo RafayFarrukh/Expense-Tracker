@@ -3,6 +3,7 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const db = require('../models')
 const User = db.User
+require("dotenv").config();
 const jwt = require('jsonwebtoken');
 module.exports={
     postRegister: async (req, res) => {
@@ -60,8 +61,8 @@ module.exports={
   // if (!isPasswordCorrect) {
   //   return res.status(401).send({ error: "Inavlid credentials" });
   // }
-  const token = jwt.sign({ sub: user.id },"hee", { expiresIn: '7d' });
-  user.password = undefined;
+  const token = jwt.sign({ userID: user.id }, process.env.JWT_SECRET, { expiresIn: '70d' });
+  // user.password = undefined;
   res.status(201).json({ user, token });
     }
 }
