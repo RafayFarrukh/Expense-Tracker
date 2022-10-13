@@ -2,6 +2,8 @@ const { getFormatedMonth, getChartData,getTotalAmount } = require('../date-proce
 const db = require('../models')
 const Record = db.Record
 const categories = { 'Expenses': 0, 'Income': 0 }
+const { QueryTypes,Op } = require('sequelize');
+const { sequelize } = require('../models');
 
 module.exports = {
     getHome: async (req, res) => {
@@ -11,21 +13,27 @@ module.exports = {
           where: { UserId: req.user.userID },
           order: [['date', 'DESC']]
         })
-       
-    const categories = { 'Expenses': 0, 'Income': 0 }
-        
-    
-        // find total expense
-       
-        const totalAmount = 
-        records.reduce((acc, cur) => 
-       
-   
-        acc + cur.amount, 0
-               
-          )
+  
+   const expense=await db.sequelize.query('Select amount from records WHERE category="Expenses" and UserId=? ',{
+  type:QueryTypes.SELECT,
+  replacements: [req.user.userID]
 
-// const totalAmount=getTotalAmount(records)
+   })
+   const Expense = expense.reduce((acc, o) => acc + parseInt(o.amount), 0)
+  //  console.log(Expense);
+   const income=await db.sequelize.query('Select amount from records WHERE category="Income"  and UserId=?',{
+    type:QueryTypes.SELECT,
+    replacements: [req.user.userID]
+
+ 
+
+     })
+     const Income = income.reduce((acc, o) => acc + parseInt(o.amount), 0)
+ 
+
+   const  totalAmount=Income-Expense
+console.log(totalAmount)
+
         const chartData = getChartData(records)
         // check if any record is found
         const isEmptyRecord = records.length ? false : true
