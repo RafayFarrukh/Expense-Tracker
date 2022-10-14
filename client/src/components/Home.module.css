@@ -1,0 +1,188 @@
+
+  /* For Mobile */
+  
+  @media screen and (max-width: 220px){
+      .container{
+          display: none ;
+      }
+  }
+  
+  @media screen and (min-width: 220px) and (max-width: 260px){
+      .container{
+          width: 190px;
+          font-size: 12px !important;
+      }
+  }
+  
+  @media screen and (min-width:260px) and (max-width: 375px){
+      .container{
+          width: 220px;
+      }
+  }
+  
+  @media screen and (min-width: 375px) and (max-width:540px){
+      .container{
+          width: 280px;
+      }
+  }
+  
+  @media screen and (min-width: 540px) and (max-width: 700px) {
+      .container{
+          width: 350px;
+      }
+  }
+  
+  @media screen and (min-width: 700px) and (max-width: 1024px) {
+      .container{
+          width: 370px;
+      }
+  }
+  
+  h1 {
+    letter-spacing: 1px;
+    margin: 0;
+  }
+  
+  h3 {
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 10px;
+    margin: 40px 0 10px;
+  }
+  
+  h4 {
+    margin: 0;
+    text-transform: uppercase;
+  }
+  
+  .inc-exp-container {
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+  
+  .inc-exp-container > div {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .inc-exp-container > div:first-of-type {
+    border-right: 1px solid #dedede;
+  }
+  
+  .money {
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 5px 0;
+  }
+  
+  .money.plus {
+    color: #2ecc71;
+  }
+  
+  .money.minus {
+    color: #c0392b;
+  }
+  
+  label {
+    display: inline-block;
+    margin: 10px 5px 10px;
+  }
+  
+  input[type='text'],
+  input[type='number'],
+  select[name='income']{
+    font-family: inherit;
+    border: 1px solid #dedede;
+    border-radius: 2px;
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    background-color: #fff;
+    color: #404040;
+  }
+  
+  .btn {
+    cursor: pointer;
+    background-color: #9c88ff;
+    box-shadow: var(--box-shadow);
+    color: #fff;
+    border: 0;
+    display: block;
+    font-size: 16px;
+    margin: 10px 0 30px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .btn:focus,
+  .delete-btn:focus {
+    outline: 0;
+  }
+  
+  .list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 40px;
+  }
+  
+  .list li {
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .list li.plus {
+    border-right: 5px solid #2ecc71;
+  }
+  
+  .list li.minus {
+    border-right: 5px solid #c0392b;
+  }
+  
+  .delete-btn {
+    cursor: pointer;
+    background-color: inherit;
+    border: 0;
+    color: #333;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 2px 5px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-100%, -50%);
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+  }
+  
+  .delete-btn:before, .delete-btn:after{
+      position :absolute;
+      content: '';
+      left: 15px;
+      background-color: #333;
+  }
+  
+  .delete-btn:before{
+      transform: rotate(45deg);
+  }
+  .delete-btn:after{
+      transform: rotate(-45deg);
+  }
+  
+  .list li:hover .delete-btn {
+    opacity: 1;
+  }
+  .maincontainer{
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }

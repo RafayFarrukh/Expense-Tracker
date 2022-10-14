@@ -12,19 +12,19 @@ module.exports={
       console.log("lll");
       const { name, email, password} = req.body
       if (!name||!email || !password) {
-        return res.status(400).send({ error: "Provide all values" });
+        return res.status(400).send({ error: "Provide all values" ,success:false  });
       }
       try {
         // Check if this is an existing email, after passing validation
-        const user = await User.findOne({ where: { email: email } })
+        const user = await User.findOne({ where: { email: email } ,success:false  })
         // an existing email
         if (user) {
          
-           res.status(404).json("Email Already Exists")
+           res.status(404).json({error:"Email Already Exists",success:false})
         }
   else{
-    const salt = await bcrypt.genSalt(10)
-    const hash = await bcrypt.hash(password, salt) 
+    // const salt = await bcrypt.genSalt("$2a$10$CwTycUXWue0Thq9StjUM0u")
+    const hash = await bcrypt.hash(password, "$2a$10$CwTycUXWue0Thq9StjUM0u") 
 
     // store user into database
   const newuser =  await User.create({
@@ -45,16 +45,16 @@ module.exports={
     postLogin: async (req, res) => {
        const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(400).send({ error: "Provide all values" });
+    return res.status(400).send({ error: "Provide all values",success:false });
   }
   const user = await User.findOne({ where: { email } });
   if (!user) {
-    return res.status(400).send({ error: "User Dont Exists" });
+    return res.status(400).send({ error: "User Dont Exists" ,success:false });
   }
   const isPasswordCorrect = await bcrypt.compare(password, user.password);
   if(!isPasswordCorrect){
-    return res.status(400).send({ error: "Invalid Password" });
-    
+    return res.status(404).send({ error: "Invalid Password",success:false });
+     
   }
   // if (!user || !(await bcrypt.compare(password, user.hash)))
   // const isPasswordCorrect = await user;

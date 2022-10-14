@@ -7,6 +7,7 @@ const apiauth = require("./middlewares/apiauth");
 const userRoutes = require('./routes/user')
 const expenseRoutes = require('./routes/expense')
 const homeRoutes = require('./routes/home')
+const searchRoutes = require('./routes/search')
 
 // app.get("/", (req, res) => {
 //   res.json({ message: "Welcome to nodeapp application." });
@@ -17,7 +18,8 @@ const User = db.User
 const Record = db.Record
 var bodyParser = require("body-parser");
 
-
+const cors = require('cors');
+app.use(cors());
 
 
 
@@ -27,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/users', userRoutes)
 app.use('/expenses', apiauth, expenseRoutes)
 app.use('/', apiauth, homeRoutes)
-
+app.use('/search',apiauth, searchRoutes)
 
 
 
