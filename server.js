@@ -29,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/users', userRoutes)
 app.use('/expenses', apiauth, expenseRoutes)
 app.use('/', apiauth, homeRoutes)
+// app.use('/',  homeRoutes)
 app.use('/search',apiauth, searchRoutes)
 
 

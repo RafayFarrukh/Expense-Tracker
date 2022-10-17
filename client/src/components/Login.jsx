@@ -28,9 +28,14 @@ const Login = () => {
         password:password,
       })
       .then((resp) => {
-        localStorage.setItem("Token", resp.data.token,);
+        localStorage.setItem("Token", resp.data.token);
+        // localStorage.setItem("Token", JSON.stringify(resp.data.token));
         localStorage.setItem("User", JSON.stringify(resp.data.user));
-     navigate('/home')
+        
+        navigate('/home')
+        // setTimeout(function(){
+        //   window.location.reload();
+        // }, 10);
        console.log(resp.data.user) 
        toast.success('Successfully Logged in',{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
 
