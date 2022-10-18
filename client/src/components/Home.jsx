@@ -11,7 +11,19 @@ const Home = () => {
   
   const [category, setType] = useState("Income");
   const [date,setDate]=useState()
-   
+  const [formErrors, setFormErrors] = useState({});
+                   
+  const initialFormState = {  name: "", amount: ""  ,category: "", date: "" };
+  const [userdata, setUser] = useState(initialFormState);
+  // const [edit, setEdit] = useState(props.currentUser);
+
+  const handleInputChangeAdd = event => {
+      const { name, value } = event.target;
+      setUser({ ...userdata, [name]: value });
+    };
+
+
+
   // const user1=localStorage.getItem('User')
   // const userid= JSON.parse(user1)
   // const initialFormState = {UserId: userid.id, name: "", amount: ""  ,category: "" , date: ""};
@@ -35,11 +47,19 @@ console.log(token);
     category:category,
     date:date,
     UserId: userid.id
+            
+    // name:userdata.name,
+    // amount:userdata.amount,
+    // category:userdata.category,
+    // date:userdata.date,
+    // UserId: userid.id
 
+
+            
    }
    ,{ 'headers': { 'x-auth-token': token } })
    .then(res=>{
-    // window.location.reload();
+    window.location.reload();
     console.log(res.data)
    })
  
@@ -53,6 +73,13 @@ console.log(token);
     UserId: userid.id
 
    });
+  // console.log({
+  //   name:userdata.name,
+  //   amount:userdata.amount,
+  //   category:userdata.category,
+  //   date:userdata.date,
+  //   UserId: userid.id
+  // });
   };
 
   const getData = () => {
@@ -115,7 +142,24 @@ console.log(token);
       
       
     },[]);
- 
+  
+    const validate = (values) => {
+      const errors = {};
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+      if (!values.name) {
+        errors.username = "Username is required!";
+      }
+      if (!values.amount) {
+        errors.email = "Email is required!";
+      } else if (!regex.test(values.email)) {
+        errors.email = "This is not a valid email format!";
+      }
+      if (!values.category) {
+        errors.password = "Password is required";
+      } 
+      return errors;
+    };
+
   return (
     <AuthCheck>
       
@@ -126,35 +170,36 @@ console.log(token);
       <h3>Add new transaction</h3>
       <form onSubmit={onSubmit}>
       {/* <form onSubmit={(event)=>{
-        onSubmit()
-          event.preventDefault();
-          setUser(initialFormState);      
-
-      }}> */}
+   }}> */}
         <div >
           <label htmlFor="text">name</label>
           <input
             type="text"
-           
+            name='name'
             value={name}
             onChange={(e) => setname(e.target.value)}
-            // value={user.name}
+            // value={userdata.name}
             // onChange={handleInputChangeAdd}
             placeholder="Enter name..."
           />
         </div>
+        <p>{formErrors.name}</p>
+
         <label htmlFor="income">Type</label>
         <select
           name="income"
           value={category}
           onChange={(e) => setType(e.target.value)}
-          // value={user.category}
+          // value={userdata.category}
           // onChange={handleInputChangeAdd}
         
         >
-            <option value="Income"> Income </option>
-            <option value="Expenses"> Expense</option>
+
+            <option value="Income" > Income </option>
+            <option value="Expenses" > Expense</option>
           </select>
+
+
           
           <div class="relative">
               <label htmlFor="date">
@@ -163,9 +208,10 @@ console.log(token);
                           </label>
                 <input
                 type='date'
+                name='date'
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                // value={user.date}
+                // value={userdata.date}
                 // onChange={handleInputChangeAdd}
             
                   />
@@ -177,10 +223,10 @@ console.log(token);
             </label>
             <input
               type="number"
-              
+              name='amount'
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              // value={user.amount}
+              // value={userdata.amount}
               // onChange={handleInputChangeAdd}
               placeholder="Enter amount..."
             />
