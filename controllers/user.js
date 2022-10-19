@@ -3,6 +3,24 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const db = require('../models')
 const User = db.User
+const Record = db.Record
+
+db.User.hasMany(
+  db.Record,
+  {
+    foreignKey:'UserId',
+    as :'record'
+});
+db.Record.belongsTo(
+  db.User,
+  {
+    foreignKey:'UserId',
+    as :'userinfo'
+}
+  
+  )
+
+
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 module.exports={
@@ -64,5 +82,17 @@ module.exports={
   const token = jwt.sign({ userID: user.id }, process.env.JWT_SECRET, { expiresIn: '70d' });
   // user.password = undefined;
   res.status(201).json({ user, token });
+    },
+
+
+
+    getAll: async (req, res) => {
+   const alluser=await User.findAll({
+    attributes:['name','email'],
+    include:[{
+      model:Record
+    }]
+   })
+   res.status(200).json(alluser)
     }
 }
