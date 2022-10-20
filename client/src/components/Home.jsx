@@ -4,7 +4,11 @@ import AuthCheck from './AuthCheck'
 import classes from './Home.module.css'
 import axios from 'axios'
 import axiosInstance from '../services/axiosInstance'
+import { useNavigate } from "react-router-dom";
+import Form from './Form'
+
 const Home = () => {
+  const navigate = useNavigate();
   const [balance,setBalance]=useState()
   const [amount,setAmount]=useState(0);
   const [name, setname] = useState("");
@@ -15,17 +19,13 @@ const Home = () => {
                    
   const initialFormState = {  name: "", amount: ""  ,category: "", date: "" };
   const [userdata, setUser] = useState(initialFormState);
-  // const [edit, setEdit] = useState(props.currentUser);
 
+const [income,setIncome]=useState(0);
+const [expense,setExpense]=useState(0);
   const handleInputChangeAdd = event => {
       const { name, value } = event.target;
       setUser({ ...userdata, [name]: value });
     };
-
-
-
-  // const user1=localStorage.getItem('User')
-  // const userid= JSON.parse(user1)
   // const initialFormState = {UserId: userid.id, name: "", amount: ""  ,category: "" , date: ""};
   // const [user, setUser] = useState((initialFormState));
 
@@ -96,14 +96,12 @@ console.log(token);
       .then((res)=>{
         console.log(token)
                 console.log(res.data)
-
-              
+       console.log(res.data.months)
+       console.log(res.data.chartData)
+              setIncome(res.data.chartData[1])
+              setExpense(res.data.chartData[0])
                   var result = res.data.records.find(item => item.UserId);
-
                   console.log(result.UserId);
-
-                
-
               const user=localStorage.getItem('User')
               const userid= JSON.parse(user)
 
@@ -115,9 +113,6 @@ console.log(token);
                           )
                       console.log("hiii")
                     }
-
-
-
 
       }
       ).then(
@@ -164,75 +159,32 @@ console.log(token);
     <AuthCheck>
       
       <>
+      <div className={classes.container}>
       <div className={classes.maincontainer}>
-      <h4 >Your Balance </h4>
-      <h1 >${balance}</h1>
-      <h3>Add new transaction</h3>
-      <form onSubmit={onSubmit}>
-      {/* <form onSubmit={(event)=>{
-   }}> */}
-        <div >
-          <label htmlFor="text">name</label>
-          <input
-            type="text"
-            name='name'
-            value={name}
-            onChange={(e) => setname(e.target.value)}
-            // value={userdata.name}
-            // onChange={handleInputChangeAdd}
-            placeholder="Enter name..."
-          />
-        </div>
-        <p>{formErrors.name}</p>
-
-        <label htmlFor="income">Type</label>
-        <select
-          name="income"
-          value={category}
-          onChange={(e) => setType(e.target.value)}
-          // value={userdata.category}
-          // onChange={handleInputChangeAdd}
+      <h4 className={classes.yourbalance}>Your Balance </h4>
+      <h1 className={classes.money}>${balance}</h1>
+      <div className={classes.incexpcontainer}>
         
-        >
-
-            <option value="Income" > Income </option>
-            <option value="Expenses" > Expense</option>
-          </select>
-
-
-          
-          <div class="relative">
-              <label htmlFor="date">
-             
-                            Date <br />
-                          </label>
-                <input
-                type='date'
-                name='date'
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                // value={userdata.date}
-                // onChange={handleInputChangeAdd}
-            
-                  />
+          <div className={classes.Income}>
+              <h4>Income</h4>
+              <p className={classes.moneyplus}>{income}</p>
           </div>
+          <div className={classes.Expense}>
+            <h4>Expense</h4>
+            <p className={classes.moneyminus}>{expense}</p>
+    
+      </div>
+     
+    </div>
+    
+      <h3>Add new transaction</h3>
+      
+     <Form/>
+            {/* <button className={classes.report} onClick={()=>{
+              navigate('/report')
+            }}>Check Report</button> */}
 
-          <div  >
-            <label htmlFor="amount">
-              Amount <br />
-            </label>
-            <input
-              type="number"
-              name='amount'
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              // value={userdata.amount}
-              // onChange={handleInputChangeAdd}
-              placeholder="Enter amount..."
-            />
-              </div>
-          <button className={classes.btn}>Add transaction</button>
-            </form>
+      </div>
       </div>
     </>
 

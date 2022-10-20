@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     amount: DataTypes.INTEGER
   }, {});
-  Record.associate = function (models) {
-    Record.belongsTo(models.User)
-  };
+  // Record.associate = function (models) {
+  //   Record.belongsTo(models.User)
+  // };
   return Record;
 };

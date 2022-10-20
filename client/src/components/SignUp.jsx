@@ -3,31 +3,57 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
-import bcrypt from 'bcryptjs'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer,toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
-
+import { useFormik } from "formik";
+import classes from './Home.module.css'
+import * as yup from "yup";
 
 const Signup = () => {
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const initialFormState = {  name: "", email: ""  ,password: ""};
+  const [userdata, setUser] = useState(initialFormState);
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-// const hashedPassword = bcrypt.hashSync(password, '$2a$10$CwTycUXWue0Thq9StjUM0u')
-//      console.log(name,email,hashedPassword)     
-
-    axios
+  const { handleSubmit, getFieldProps, touched, errors, isValid } = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: yup.object({
+      name: yup
+      .string()
+      .required("Username is Required")
+      .min(5, "Username must be more then 5 characters"),
+      email: yup
+        .string()
+        .required("E-mail is Required!")
+        .email("E-mail Invalid"),
+      password: yup
+        .string()
+        .required("Password is Required")
+        .matches(/(?=[a-zA-Z])/, "A senha deve conter ao menos 1 letra")
+        
+        .min(5, "Password must be atleast 5 characters"),
+    
+    }),
+    onSubmit: values => {
+      const registerData = {
+        email: values.email.toLocaleLowerCase(),
+        password: values.password,
+        name: values.name
+          
+      };
+      axios
       .post("http://localhost:4000/users/register", {
-        name:name,
-        email:email,
-        password:password,
+        name:values.name,
+        email:values.email,
+        password:values.password,
       })
       .then((resp) => {
         console.log(resp.data.user) 
@@ -41,7 +67,11 @@ const Signup = () => {
          }
       }
       );
-  };
+      console.log(registerData);
+    }
+  });
+
+ 
   return (
     <>
       
@@ -65,25 +95,18 @@ const Signup = () => {
                   <input
                     name="name"
                     type="text"
-                    required
-                    onChange={(e) => setname(e.target.value)}
-                    className="
-            block
-            w-full
-            mt-1
-            border-gray-300
-            rounded-md
-            shadow-sm
-            focus:border-indigo-300
-            focus:ring
-            focus:ring-indigo-200
-            focus:ring-opacity-50
-          "
+                    className={classes.inputsignup}
+                    // required
+                    // value={values.name}
+                    {...getFieldProps("name")}
+                   
+     
                     minlength="5"
                     placeholder="User name"
                   />
                 </label>
-
+             
+                {touched.name && errors.name ? <small>{errors.name}</small> : null}
                 <label className="block mb-6">
                   <EmailIcon />
                   <span className="text-gray-700 ml-2 font-bold">
@@ -92,48 +115,38 @@ const Signup = () => {
                   </span>
                   <input
                     name="email"
+                    className={classes.inputsignup}
+                    
                     type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="
-            block
-            w-full
-            mt-1
-            border-gray-300
-            rounded-md
-            shadow-sm
-            focus:border-indigo-300
-            focus:ring
-            focus:ring-indigo-200
-            focus:ring-opacity-50
-          "
+                    // value={values.email}
+                    {...getFieldProps("email")}
+                
+    
                     placeholder="Email"
-                    required
+                    // required
                   />
                 </label>
+
+                {touched.email && errors.email ? <small>{errors.email}</small> : null}
+            
                 <label className="block mb-6">
                   <LockIcon />
                   <span className="text-gray-700 ml-2 font-bold">Password</span>
                   <input
                     name="password"
                     type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="
-            block
-            w-full
-            mt-1
-            border-gray-300
-            rounded-md
-            shadow-sm
-            focus:border-indigo-300
-            focus:ring
-            focus:ring-indigo-200
-            focus:ring-opacity-50
-          "
+                    // value={values.password}
+                    {...getFieldProps("password")}
+                    className={classes.inputsignup}
+              
+   
                     minlength="5"
                     placeholder="Password"
-                    required
+                    // required
                   />
                 </label>
+                {touched.password && errors.password ? <small>{errors.password}</small> : null}
+             
 
                 <div className="mb-6">
                   <button

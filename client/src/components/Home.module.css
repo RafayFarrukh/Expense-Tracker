@@ -1,67 +1,43 @@
-
-  /* For Mobile */
-  
-  @media screen and (max-width: 220px){
-      .container{
-          display: none ;
-      }
-  }
-  
-  @media screen and (min-width: 220px) and (max-width: 260px){
-      .container{
-          width: 190px;
-          font-size: 12px !important;
-      }
-  }
-  
-  @media screen and (min-width:260px) and (max-width: 375px){
-      .container{
-          width: 220px;
-      }
-  }
-  
-  @media screen and (min-width: 375px) and (max-width:540px){
-      .container{
-          width: 280px;
-      }
-  }
-  
-  @media screen and (min-width: 540px) and (max-width: 700px) {
-      .container{
-          width: 350px;
-      }
-  }
-  
-  @media screen and (min-width: 700px) and (max-width: 1024px) {
-      .container{
-          width: 370px;
-      }
-  }
-  
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
   h1 {
     letter-spacing: 1px;
     margin: 0;
   }
   
   h3 {
-    border-bottom: 1px solid #bbb;
+    /* border-bottom: 2px solid rgb(58, 54, 54); */
     padding-bottom: 10px;
     margin: 40px 0 10px;
-    width: 60%;
+    width: 40%;
+    font-weight: bold;
   }
   
   h4 {
     margin: 0;
     text-transform: uppercase;
+    font-weight: bold;
   }
   
-  .inc-exp-container {
+  .incexpcontainer {
     background-color: #fff;
     box-shadow: var(--box-shadow);
-    padding: 20px;
+    padding: 10px;
     display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
+    justify-content: space-around;
+    margin-top: 50px;
+    width: 40%;
+    gap: 10px;
+    font-size: 20px;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 10px;
+    box-shadow: 0px 10px 10px 0px rgb(217, 217, 217);
+
+    /* margin: 10px 0; */
   }
   
   .inc-exp-container > div {
@@ -74,37 +50,46 @@
   }
   
   .money {
+    font-weight: bold;
+
+    font-size: 50px;
+    letter-spacing: 1px;
+    margin: 5px 0;
+  }
+  
+  .moneyplus {
+    color: #2ecc71;
     font-size: 20px;
     letter-spacing: 1px;
     margin: 5px 0;
   }
   
-  .money.plus {
-    color: #2ecc71;
-  }
-  
-  .money.minus {
+  .moneyminus {
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 5px 0;
     color: #c0392b;
   }
-  
-  label {
-    display: inline-block;
-    margin: 10px 5px 10px;
+  .plusminus{
+    flex-direction: row;
+   
   }
-  
   input[type='text'],
   input[type='number'],
-  select[name='income']
+  input[type='date'],
+
+  select[name='category']
   {
     font-family: inherit; 
     border: 1px solid #dedede;
-    /* border-radius: 10px; */
+    border-radius: 10px;
     display: block;
     font-size: 16px;
     padding: 10px;
-    width: 60%;
+    /* width: 100%; */
     background-color: #fff;
-    color: #404040;
+    color: #6b3d3d;
+    
   }
   
   .btn {
@@ -117,7 +102,7 @@
     font-size: 16px;
     margin: 10px 0 30px;
     padding: 10px;
-    width: 60%;
+    width: 100%;
   }
   
   .btn:focus,
@@ -184,10 +169,114 @@
     opacity: 1;
   }
   .maincontainer{
-    /* width: 60%; */
-    width: 50%;
-    margin-left: 30%;
-    margin-right: 30%;
-    /* margin-left: auto; */
-    /* margin-right: auto; */
+    display: flex;
+    flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200%;
   }
+  .container{
+    display: flex;
+    /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin-left: 11%;
+  }
+  .form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 45%;
+  }
+  .FormContainer{
+  
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .Income{
+    border-right: 1px solid rgb(210, 210, 210);
+    width: 100%;
+    text-align: center;
+  }
+  .Expense{
+    width: 100%;
+    text-align: center;
+  }
+  .report{
+    cursor: pointer;
+    background-color: #9c88ff;
+    box-shadow: var(--box-shadow);
+    color: #fff;
+    /* border: 0; */
+    display: block;
+    font-size: 16px;
+    /* margin: 10px 0 30px; */
+    padding: 10px;
+    width: 42%;
+  }
+  .date {
+  margin-left: 120px ;
+ display: flex;
+ flex-direction: column;
+
+  }
+  .date label{
+    /* margin-left: 60px; */
+  }
+  .date input{
+  
+  margin-right: 100px ;
+
+  }
+  small{
+    color: red;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .inputsignup{
+    width: 100% !important;
+    display: block;
+    padding: 10px;
+    border: rgb(149, 41, 41);
+ 
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  .labelfields{
+ 
+    float: left !important;
+  }
+  @media screen and (max-width: 480px){
+    .money {
+      font-size: 30px;
+      }
+     
+      .incexpcontainer{
+        width: 100%;
+        margin-top: 30px;
+      }
+      .form{
+      width: 200%;
+  margin-left: 30px;
+      }
+      h3{
+        white-space: pre;
+        margin-right: 100px;
+      }
+      .report{
+        white-space: pre;
+  width: 100%;
+  border-radius: 10px;
+      }
+      .FormContainer{
+        width: 125%;
+      }
+
+     
+}

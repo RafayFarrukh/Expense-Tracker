@@ -5,20 +5,20 @@ const db = require('../models')
 const User = db.User
 const Record = db.Record
 
-db.User.hasMany(
-  db.Record,
-  {
-    foreignKey:'UserId',
-    as :'record'
-});
-db.Record.belongsTo(
-  db.User,
-  {
-    foreignKey:'UserId',
-    as :'userinfo'
-}
+// db.User.hasMany(
+//   db.Record,
+//   {
+//     foreignKey:'UserId',
+//     as :'record'
+// });
+// db.Record.belongsTo(
+//   db.User,
+//   {
+//     foreignKey:'UserId',
+//     as :'userinfo'
+// }
   
-  )
+//   )
 
 
 require("dotenv").config();
@@ -88,9 +88,10 @@ module.exports={
 
     getAll: async (req, res) => {
    const alluser=await User.findAll({
-    attributes:['name','email'],
+   
     include:[{
-      model:Record
+      model:Record,
+      as:"recordDetail"
     }]
    })
    res.status(200).json(alluser)

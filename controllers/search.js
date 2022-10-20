@@ -44,12 +44,14 @@ module.exports = {
         },
         order: [['date', 'DESC']]
       })
+      console.log(displayRecords);
 
       // check if any record is found
       const isEmptyRecord = displayRecords.length ? false : true
       // find total expense
       const totalAmount = displayRecords.reduce((acc, cur) => acc + cur.amount, 0)
       // get chart data
+      
       const chartData = getChartData(displayRecords)
       res.status(200).json({  records: displayRecords, totalAmount, selectedCategory, selectedMonth, months, chartData, showChart: true, isEmptyRecord })
 

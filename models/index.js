@@ -36,21 +36,32 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-// db.User=require('./User')(sequelize,DataTypes)
-// db.Record=require('./Record')(sequelize,DataTypes)
-
-// db.User.hasMany(
-//   db.Record,
-//   {
-//     foreignKey:'UserId',
-//     as :'record'
-// });
-// db.Record.belongsTo(
-//   db.User,
-//   {
-//     foreignKey:'UserId',
-//     as :'userinfo'
-// }
+db.User=require('./User')(sequelize,DataTypes)
+db.Record=require('./Record')(sequelize,DataTypes)
+console.log(db.User);
+db.User.hasMany(
+  db.Record,
+  {
+    as:'recordDetail'
   
-//   )
+});
+db.Record.belongsTo(
+  db.User,
+  {
+    foreignKey:'UserId',
+    as:'userDetail'
+   
+}
+  )
+
+//   User.hasMany(Shop, {
+//     foreignKey: 'userId',
+//     onDelete: "CASCADE",
+// })
+// Shop.belongsTo(User, {
+//     foreignKey: 'userId',
+// })
+
+
+
 module.exports = db;

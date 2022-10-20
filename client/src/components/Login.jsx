@@ -1,56 +1,96 @@
-import React from "react";
 import LockIcon from "@mui/icons-material/Lock";
 import EmailIcon from "@mui/icons-material/Email";
-
-import { useState } from "react";
-import Navbar from "./Navbar";
-import bcrypt from 'bcryptjs'
-import { useContext, useRef } from "react";
+import { useState ,React} from "react";
 import { ToastContainer,toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import classes from './Home.module.css'
+import { useFormik } from "formik";
+import * as yup from "yup";
+
 const Login = () => {
     const navigate = useNavigate();
 
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    
- 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-   
-    axios
-      .post("http://localhost:4000/users/login", {
-        // .post("/api/user/login", {
-        // email: email,
-        email:email,
-        password:password,
-      })
-      .then((resp) => {
-        localStorage.setItem("Token", resp.data.token);
-        // localStorage.setItem("Token", JSON.stringify(resp.data.token));
-        localStorage.setItem("User", JSON.stringify(resp.data.user));
+  const initialFormState = {   email: ""  ,password: ""};
+  const { handleSubmit, getFieldProps, touched, errors, isValid } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: yup.object({
+      email: yup
+        .string()
+        .required("E-mail is Required!")
+        .email("E-mail Invalid"),
+      password: yup
+        .string()
+        .required("Password is Required")
+        .matches(/(?=[a-zA-Z])/, "A senha deve conter ao menos 1 letra")
         
+        .min(5, "Password must be atleast 5 characters"),
+    
+    }),
+    onSubmit: values => {
+      const registerData = {
+      
+        name: values.name,
+        password: values.password,
+          
+      };
+      axios
+      .post("http://localhost:4000/users/login", {
+        email:values.email,
+        password:values.password,
+      })
+    .then((resp) => {
+        localStorage.setItem("Token", resp.data.token);
+        localStorage.setItem("User", JSON.stringify(resp.data.user));       
         navigate('/home')
-        // setTimeout(function(){
-        //   window.location.reload();
-        // }, 10);
        console.log(resp.data.user) 
        toast.success('Successfully Logged in',{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
 
       })
+      .catch((res) => {
+        console.log(res);
+        if(res.response.data.success==false){
+          toast.error(res.response.data.error,{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
+         }
+      }
+      );
+      console.log(registerData);
+    }
+  });
+ 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+   
+  //   axios
+  //     .post("http://localhost:4000/users/login", {
+  //       email:email,
+  //       password:password,
+  //     })
+  //     .then((resp) => {
+  //       localStorage.setItem("Token", resp.data.token);
+  //       localStorage.setItem("User", JSON.stringify(resp.data.user));       
+  //       navigate('/home')
+  //      console.log(resp.data.user) 
+  //      toast.success('Successfully Logged in',{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
+
+  //     })
 
      
-      .catch((res) => {
-      console.log(res.response.data);
-   if(res.response.data.success==false){
-    toast.error(res.response.data.error,{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
-   }
+  //     .catch((res) => {
+  //     console.log(res.response.data);
+  //  if(res.response.data.success==false){
+  //   toast.error(res.response.data.error,{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
+  //  }
        
       
-      });
-  };
+  //     });
+  // };
   return (
     <>
   
@@ -74,50 +114,30 @@ const Login = () => {
                   </span>
                   <input
                     name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    {...getFieldProps("email")}
+
                     type="email"
-                    className="
-            block
-            w-full
-            mt-1
-            border-gray-300
-            rounded-md
-            shadow-sm
-            focus:border-indigo-300
-            focus:ring
-            focus:ring-indigo-200
-            focus:ring-opacity-50
-          "
+                    className={classes.inputsignup}
                     placeholder="Email"
                     required
                   />
                 </label>
+                {touched.email && errors.email ? <small>{errors.email}</small> : null}
                 <label className="block mb-6">
                   <LockIcon />
                   <span className="text-gray-700 ml-2 font-bold">Password</span>
                   <input
                     name="password"
                     type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="
-            block
-            w-full
-            mt-1
-            border-gray-300
-            rounded-md
-            shadow-sm
-            focus:border-indigo-300
-            focus:ring
-            focus:ring-indigo-200
-            focus:ring-opacity-50
-          "
+                    {...getFieldProps("password")}
+
+                    className={classes.inputsignup}
                     minLength="5"
                     placeholder="Password"
                     required
                   />
                 </label>
+                {touched.password && errors.password ? <small>{errors.password}</small> : null}
 
                 <div className="mb-6">
                   <button

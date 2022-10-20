@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
 
   }, {});
-  User.associate = function (models) {
-    User.hasMany(models.Record)
-  };
+  // User.associate = function (models) {
+  //   User.hasMany(models.Record)
+  // };
  
   return User;
 };
