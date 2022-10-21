@@ -8,6 +8,7 @@ const userRoutes = require('./routes/user')
 const expenseRoutes = require('./routes/expense')
 const homeRoutes = require('./routes/home')
 const searchRoutes = require('./routes/search')
+const reportRoutes = require('./routes/report')
 
 // app.get("/", (req, res) => {
 //   res.json({ message: "Welcome to nodeapp application." });
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/users', userRoutes)
 app.use('/expenses', apiauth, expenseRoutes)
 app.use('/', apiauth, homeRoutes)
+app.use('/user', apiauth, reportRoutes)
 // app.use('/',  homeRoutes)
 app.use('/search',apiauth, searchRoutes)
 

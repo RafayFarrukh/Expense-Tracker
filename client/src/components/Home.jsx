@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect,useState } from 'react'
 import AuthCheck from './AuthCheck'
 import classes from './Home.module.css'
-import axios from 'axios'
 import axiosInstance from '../services/axiosInstance'
 import { useNavigate } from "react-router-dom";
 import Form from './Form'
@@ -22,76 +21,16 @@ const Home = () => {
 
 const [income,setIncome]=useState(0);
 const [expense,setExpense]=useState(0);
-  const handleInputChangeAdd = event => {
-      const { name, value } = event.target;
-      setUser({ ...userdata, [name]: value });
-    };
-  // const initialFormState = {UserId: userid.id, name: "", amount: ""  ,category: "" , date: ""};
-  // const [user, setUser] = useState((initialFormState));
 
-  // const handleInputChangeAdd = event => {
-  //   const { name, value } = event.target;
-  //   setUser({ ...user, [name]: value });
-  // };
- 
   const token = localStorage.getItem('Token') //Or however you choose to get it
 console.log(token);      
-  const onSubmit = (e) => {
-    const user=localStorage.getItem('User')
-    const userid= JSON.parse(user)
 
-    e.preventDefault();
-   axiosInstance.post('http://localhost:4000/expenses/new',{
-    name:name,
-    amount:amount,
-    category:category,
-    date:date,
-    UserId: userid.id
-            
-    // name:userdata.name,
-    // amount:userdata.amount,
-    // category:userdata.category,
-    // date:userdata.date,
-    // UserId: userid.id
-
-
-            
-   }
-   ,{ 'headers': { 'x-auth-token': token } })
-   .then(res=>{
-    window.location.reload();
-    console.log(res.data)
-   })
- 
-  
-
-   console.log({
-    name:name,
-    amount:amount,
-    category:category,
-    date:date,
-    UserId: userid.id
-
-   });
-  // console.log({
-  //   name:userdata.name,
-  //   amount:userdata.amount,
-  //   category:userdata.category,
-  //   date:userdata.date,
-  //   UserId: userid.id
-  // });
-  };
 
   const getData = () => {
 
-     
- 
-
-    //  if ( localStorage.getItem('Token')) {
 
 console.log(token);
       axiosInstance
-      // axios
       .get("http://localhost:4000" ,{ 'headers': { 'x-auth-token': token } })
       .then((res)=>{
         console.log(token)
@@ -115,18 +54,12 @@ console.log(token);
                     }
 
       }
-      ).then(
-        ()=>{
-          console.log("kk")
-        }
-      ) 
+      )
       .catch((err) => {
         console.log(err);
         console.log(err.message);
       });
-      
-    // }
-   
+
      }
      useEffect(function () {
 
@@ -137,23 +70,7 @@ console.log(token);
       
       
     },[]);
-  
-    const validate = (values) => {
-      const errors = {};
-      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-      if (!values.name) {
-        errors.username = "Username is required!";
-      }
-      if (!values.amount) {
-        errors.email = "Email is required!";
-      } else if (!regex.test(values.email)) {
-        errors.email = "This is not a valid email format!";
-      }
-      if (!values.category) {
-        errors.password = "Password is required";
-      } 
-      return errors;
-    };
+ 
 
   return (
     <AuthCheck>
@@ -180,9 +97,10 @@ console.log(token);
       <h3>Add new transaction</h3>
       
      <Form/>
-            {/* <button className={classes.report} onClick={()=>{
+            <button className={classes.report} onClick={()=>{
               navigate('/report')
-            }}>Check Report</button> */}
+              // window.location.reload()
+            }}>Check Report</button>
 
       </div>
       </div>
