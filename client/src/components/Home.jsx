@@ -23,20 +23,16 @@ const [income,setIncome]=useState(0);
 const [expense,setExpense]=useState(0);
 
   const token = localStorage.getItem('Token') //Or however you choose to get it
-console.log(token);      
+     
 
 
   const getData = () => {
 
 
-console.log(token);
       axiosInstance
       .get("http://localhost:4000" ,{ 'headers': { 'x-auth-token': token } })
       .then((res)=>{
-        console.log(token)
-                console.log(res.data)
-       console.log(res.data.months)
-       console.log(res.data.chartData)
+        
               setIncome(res.data.chartData[1])
               setExpense(res.data.chartData[0])
                   var result = res.data.records.find(item => item.UserId);
@@ -50,7 +46,7 @@ console.log(token);
                         res.data.totalAmount
               
                           )
-                      console.log("hiii")
+                 
                     }
 
       }
@@ -64,7 +60,7 @@ console.log(token);
      useEffect(function () {
 
       if (token) {
-        console.log("token milgya");
+      
         getData();
       }
       

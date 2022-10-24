@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
   const Record = sequelize.define('Record', {
     name: DataTypes.STRING,
     category: DataTypes.STRING,
-    date: DataTypes.DATE,
+    date: DataTypes.DATEONLY,
+ 
     amount: DataTypes.INTEGER
   }, {});
   // Record.associate = function (models) {

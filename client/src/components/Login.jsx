@@ -34,12 +34,13 @@ const Login = () => {
     
     }),
     onSubmit: values => {
-      const registerData = {
+      // const registerData = {
       
-        name: values.name,
-        password: values.password,
+      //   email: values.email,
+      //   password: values.password,
           
-      };
+      // };
+      
       axios
       .post("http://localhost:4000/users/login", {
         email:values.email,
@@ -60,7 +61,7 @@ const Login = () => {
          }
       }
       );
-      console.log(registerData);
+      
     }
   });
  

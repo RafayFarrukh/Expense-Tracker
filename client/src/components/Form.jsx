@@ -4,6 +4,8 @@ import AuthCheck from './AuthCheck'
 import classes from './Home.module.css'
 import axios from 'axios'
 import axiosInstance from '../services/axiosInstance'
+import moment, * as moments from 'moment';
+
 const Form = () => {
     const initialFormState = {  name: "", amount: ""  ,category: "", date: "" };
     const [userdata, setUser] = useState(initialFormState);
@@ -17,7 +19,7 @@ const Form = () => {
         setUser({ ...userdata, [name]: value });
       };
       const token = localStorage.getItem('Token') //Or however you choose to get it
-console.log(token);      
+    
   const onSubmit = (e) => {
     const user=localStorage.getItem('User')
     const userid= JSON.parse(user)
@@ -28,6 +30,7 @@ console.log(token);
     amount:userdata.amount,
     category:userdata.category,
     date:userdata.date,
+    
     UserId: userid.id
 
 
@@ -39,13 +42,13 @@ console.log(token);
     console.log(res.data)
    })
  
-  console.log({
-    name:userdata.name,
-    amount:userdata.amount,
-    category:userdata.category,
-    date:userdata.date,
-    UserId: userid.id
-  });
+  // console.log({
+  //   name:userdata.name,
+  //   amount:userdata.amount,
+  //   category:userdata.category,
+  //   date:userdata.date,
+  //   UserId: userid.id
+  // });
   };
   return (<div className={classes.FormContainer}> <form onSubmit={onSubmit} className={classes.form}>
      

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Popper from "popper.js";
-
+import { Transition } from "@headlessui/react";
 import { useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
@@ -25,6 +25,7 @@ const Navbar = () => {
   };
   const [navbarOpen, setNavbarOpen] = useState(false);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
     setNavbarOpen((prev) => !prev);
@@ -61,7 +62,7 @@ const [user,setUser]=useState();
   return (
     <>
       <div>
-        <nav className="nav-links bg-white border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-800">
+        <nav className="nav-links bg-white bg-gray-100 px-2 sm:px-4 py-2.5  ">
           <div className="container flex flex-wrap justify-between items-center mx-auto">
             <div className="flex items-center">
              
@@ -73,7 +74,7 @@ const [user,setUser]=useState();
               onClick={handleToggle}
               data-collapse-toggle="mobile-menu"
               type="button"
-              className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 ml-3 text-sm text-gray-100 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-100 dark:hover:bg-gray-100 dark:focus:ring-gray-100"
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
@@ -87,7 +88,7 @@ const [user,setUser]=useState();
                 />
               )}
               <span className="sr-only">Open main menu</span>
-              <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
+              <ul className={`menuNav bg-gray-100 ${navbarOpen ? " showMenu" : ""}`}>
                 <li>
                   <a
                     to="/"
@@ -97,32 +98,41 @@ const [user,setUser]=useState();
                     onClick={() => closeMenu()}
                     exact
                   >
-                    Home
+                  
                   </a>
                 </li>
                 <li>
-                  <a
-                    // to="/create"
-                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-yellow-100 hover:bg-yellow-500 md:hover:bg-transparent md:border-0 md:hover:text-yellow-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  <Link
+                    to="/home"
+                    className="block py-2 pr-1 pl-3 text-white  border-b border-yellow-100 hover:bg-yellow-500 md:hover:bg-transparent md:border-0 md:hover:text-yellow-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
-                     <li className="listItem">Create</li>
-                  </a>
+                     <li className="listItem">Home</li>
+                  </Link>
                 </li>
             
                   <li>
-                    <a
+                    <Link
                     //   to="/blogs"
-                      className="block py-2 pr-4 pl-3 text-gray-700 border-b border-yellow-100 hover:bg-yellow-500 md:hover:bg-transparent md:border-0 md:hover:text-yellow-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      className="block py-2 pr-4 pl-3 text-white  border-b border-yellow-100 hover:bg-yellow-500 md:hover:bg-transparent md:border-0 md:hover:text-yellow-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        localStorage.removeItem("Token");
+                        localStorage.removeItem("User");
+                        // window.location.reload("/");
+                       navigate("/login")
+                      
+      
+                      }}
                     >
-                      Blogs
-                    </a>
+                      Logout
+                    </Link>
                   </li>
                 
                   <>
                     <li>
                       <Link
                         to="/login"
-                        className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                        className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                       >
                         Login
                       </Link>

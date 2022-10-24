@@ -43,12 +43,12 @@ const Signup = () => {
     
     }),
     onSubmit: values => {
-      const registerData = {
-        email: values.email.toLocaleLowerCase(),
-        password: values.password,
-        name: values.name
+      // const registerData = {
+      //   email: values.email.toLocaleLowerCase(),
+      //   password: values.password,
+      //   name: values.name
           
-      };
+      // };
       axios
       .post("http://localhost:4000/users/register", {
         name:values.name,
@@ -67,7 +67,7 @@ const Signup = () => {
          }
       }
       );
-      console.log(registerData);
+      // console.log(registerData);
     }
   });
 

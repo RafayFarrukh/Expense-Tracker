@@ -28,7 +28,7 @@ module.exports = {
     
         try {
           // save the document to record collection
-    
+    // res.json(newRecord)
          const record= await newRecord.save()
           res.status(200).json(record)
         } catch (err) {

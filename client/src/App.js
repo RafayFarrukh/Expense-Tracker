@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
+import Nav from './components/Nav';
 import Login from './components/Login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from './components/SignUp';
@@ -13,7 +14,8 @@ function App() {
   return (
     <>
     <BrowserRouter>
-     <Navbar/>
+     {/* <Navbar/> */}
+     <Nav/>
      <Routes>
      <Route exact path="login" element={<Login />} />
      <Route exact path="signup" element={<Signup/>} />

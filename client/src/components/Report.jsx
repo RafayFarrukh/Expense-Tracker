@@ -5,27 +5,26 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
 import axiosInstance from '../services/axiosInstance'
-import moment from "moment";
+import moment, * as moments from 'moment';
 const dateFilterParams = {
   comparator: function (filterLocalDateAtMidnight, cellValue) {
     var dateAsString = cellValue;
     if (dateAsString == null) return -1;
     var dateParts = dateAsString.split('-');
-   
     var cellDate = new Date(
-      Number(dateParts[2]),
+      Number(dateParts[0]),
       Number(dateParts[1]) - 1,
-      // Number(dateParts[0])
+      Number(dateParts[2]),
     );
-    // if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-    //   return 0;
-    // }
-    // if (cellDate < filterLocalDateAtMidnight) {
-    //   return -1;
-    // }
-    // if (cellDate > filterLocalDateAtMidnight) {
-    //   return 1;
-    // }
+    if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+      return 0;
+    }
+    if (cellDate < filterLocalDateAtMidnight) {
+      return -1;
+    }
+    if (cellDate > filterLocalDateAtMidnight) {
+      return 1;
+    }
   },
   browserDatePicker: true,
 };
@@ -37,10 +36,12 @@ const [data,setData]=useState('')
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   // const rowData = [
-  //   { make: "Toyota", model: "Celica", price: 35000, date: "09-02-2022" },
-  //   { make: "Ford", model: "Mondeo", price: 32000, date: "11-02-2022" },
-  //   { make: "Porsche", model: "Boxter", price: 72000, date: "10-02-2022" },
-  //   { make: "Mers", model: "Mers", price: 92000, date: "12-02-2022" }
+  //   { name: "Toyota", category: "Celica", amount: 35000, date: "09-02-2022" },
+  //   { name: "Ford", category: "Mondeo", amount: 32000, date: "11-02-2022" },
+  //   { name: "Porsche", category: "Boxter", amount: 72000, date: "10-02-2022" },
+  //   { name: "rafay3", category: "Mers", amount: 92000, date: "2022-12-10" },
+  //   { name: "rafay1", category: "Mers", amount: 92000, date: "12-09-2022" },
+  //   { name: "rafay2", category: "Mers", amount: 92000, date: "2022-09-19" }
   // ];
  
 
@@ -68,8 +69,20 @@ const [data,setData]=useState('')
     axiosInstance
     .get("http://localhost:4000" ,{ 'headers': { 'x-auth-token': token } })
    .then((res)=>{
-    console.log(moment(res.data.records[0].date).utc().format('YYYY-MM-DD'));
+  //  console.log(moment(res.data.records[0].date.utc().format('YYYY-MM-DD')))
      setRowData(res.data.records)
+     console.log(res.data.records)
+    
+res.data.records.forEach(
+  record=>{
+    // console.log(moment(record.date).utc().format('DD-MM-YYYY'))
+
+  
+  }
+)
+    
+    //  console.log(res.data.records[0].date)
+ 
    })
    
     if (gridApi) {
@@ -87,19 +100,17 @@ const [data,setData]=useState('')
       }
 
     }
-    console.log(
-      // moment(startDate).format('YYYY-MM-DD').utc()
-    )
-
+ 
+console.log(startDate,endDate);
   }, [startDate, endDate])
   return (
     <AuthCheck>
      
-     <div className="ag-theme-alpine " style={{ height: 400 }}>
+     <div className="ag-theme-alpine" style={{ height: 600 }}>
       <div className='flex'>
      From : <input type="date"
      
-         value={(startDate)}
+         value={startDate}
           onChange={e => setStartDate(e.target.value)} />
         To : <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
         </div>

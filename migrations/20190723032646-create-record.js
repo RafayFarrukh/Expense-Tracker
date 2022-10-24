@@ -15,9 +15,14 @@ module.exports = {
         type: Sequelize.STRING
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY,
+        get: function() {
+          return moment.utc(this.getDataValue('date')).format('DD-MM-YYYY');
+        }
+       
       },
-      amount: {
+      
+      amount: { 
         type: Sequelize.INTEGER
       },
       createdAt: {
