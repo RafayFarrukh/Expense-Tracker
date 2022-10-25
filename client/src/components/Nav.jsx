@@ -45,17 +45,30 @@ function Nav() {
     <div>
       <nav className="bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center justify-center">
+ 
+
+             <div className=" text-white flex justify-start relative gap-x-2">
+                  <img
+                      className="absolute h-16 w-8  inline-block "
+                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                      alt="Workflow"
+                    />
+                    <h1 className="absolute mt-5 ml-10 ">Expense Tracker</h1>
+               </div> 
+       
+          
+          <div className="flex items-center justify-end h-16">
+
+            <div className="flex items-center justify-end">
               <div className="flex-shrink-0">
-                <img
+                {/* <img
                   className="h-8 w-8"
                   src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                   alt="Workflow"
-                />
+                /> */}
                 
               </div>
-              <h1 className="m-4 text-white flex justify-start ">Expense Tracker</h1>
+              {/* <h1 className="m-4 text-white flex justify-start ">Expense Tracker</h1> */}
               <div className="hidden md:block   flex  justify-end  ">
        
                 <div className="ml-10 flex items-baseline space-x-8   justify-end">
@@ -97,47 +110,47 @@ function Nav() {
                                       <Link
                                           className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 
-              // style={{ transition: "all 5s ease" }}
-              // type="li"
-              ref={btnDropdownRef}
-              onClick={() => {
-                dropdownPopoverShow
-                  ? closeDropdownPopover()
-                  : openDropdownPopover();
-              }}
-            >
-              
-             {user}
-               
-              <ArrowDropDownIcon/>
-            </Link>
-            <div
-              ref={popoverDropdownRef}
-              className={
-                (dropdownPopoverShow ? "block "
-                 : "hidden ") 
-               
-              }
-              style={{ minWidth: "8rem" }}
-            >
-           
-              <Link
-                to="/login"
-                className="block mt-2  -ml-6 text-black bg-gray-600 text-white px-1 py-2  w-1/2 rounded-md text-sm font-medium"
+                      // style={{ transition: "all 5s ease" }}
+                      // type="li"
+                      ref={btnDropdownRef}
+                      onClick={() => {
+                        dropdownPopoverShow
+                          ? closeDropdownPopover()
+                          : openDropdownPopover();
+                      }}
+                        >
+                      
+                    {user}
+                      
+                      <ArrowDropDownIcon/>
+                              </Link>
+                    <div
+                      ref={popoverDropdownRef}
+                      className={
+                        (dropdownPopoverShow ? "block "
+                        : "hidden ") 
+                      
+                      }
+                      style={{ minWidth: "8rem" }}
+                    >
+                  
+                      <Link
+                        to="/login"
+                        className="block mt-2  -ml-6 text-black bg-gray-500 text-white px-1 py-2  w-1/2 rounded-md text-sm font-medium"
 
-                onClick={(e) => {
-                  e.preventDefault();
-                  localStorage.removeItem("Token");
-                  localStorage.removeItem("User");
-                  // window.location.reload("/");
-                 navigate("/login")
-                
+                        onClick={(e) => {
+                          e.preventDefault();
+                          localStorage.removeItem("Token");
+                          localStorage.removeItem("User");
+                          // window.location.reload("/");
+                        navigate("/login")
+                        
 
-                }}
-              >
-                Logout
-              </Link>
-              </div>        
+                        }}
+                      >
+                        Logout
+                      </Link>
+                      </div>        
 
 
                             

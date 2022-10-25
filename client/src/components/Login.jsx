@@ -34,13 +34,7 @@ const Login = () => {
     
     }),
     onSubmit: values => {
-      // const registerData = {
-      
-      //   email: values.email,
-      //   password: values.password,
-          
-      // };
-      
+      console.log(values)
       axios
       .post("http://localhost:4000/users/login", {
         email:values.email,
@@ -107,7 +101,7 @@ const Login = () => {
               <form method="POST" action="" onSubmit={handleSubmit}>
               
 
-                <label className="block mb-6">
+                <label className="block mb-2">
                   <EmailIcon />
                   <span className="text-gray-700 ml-2 font-bold">
                     {" "}
@@ -124,7 +118,7 @@ const Login = () => {
                   />
                 </label>
                 {touched.email && errors.email ? <small>{errors.email}</small> : null}
-                <label className="block mb-6">
+                <label className="block mb-2">
                   <LockIcon />
                   <span className="text-gray-700 ml-2 font-bold">Password</span>
                   <input

@@ -86,7 +86,7 @@ const Signup = () => {
                 Signup
               </h1>
               <form method="POST" action="" onSubmit={handleSubmit}>
-                <label className="block mb-6">
+                <label className="block mb-3">
                   <PersonIcon />
                   <span className="text-gray-700  ml-2 mt-10 font-bold">
                     User Name
@@ -107,7 +107,7 @@ const Signup = () => {
                 </label>
              
                 {touched.name && errors.name ? <small>{errors.name}</small> : null}
-                <label className="block mb-6">
+                <label className="block mb-3">
                   <EmailIcon />
                   <span className="text-gray-700 ml-2 font-bold">
                     {" "}
@@ -129,7 +129,7 @@ const Signup = () => {
 
                 {touched.email && errors.email ? <small>{errors.email}</small> : null}
             
-                <label className="block mb-6">
+                <label className="block mb-3">
                   <LockIcon />
                   <span className="text-gray-700 ml-2 font-bold">Password</span>
                   <input

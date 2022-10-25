@@ -15,9 +15,11 @@ const Navbar = () => {
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
-    new Popper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start"
-    });
+    new Popper( popoverDropdownRef.current,btnDropdownRef.current
+    //   , {
+    //   placement: "bottom-start"
+    // }
+    );
     setDropdownPopoverShow(true);
   };
   const closeDropdownPopover = () => {
