@@ -2,21 +2,27 @@ import React from 'react'
 import { useEffect,useState } from 'react'
 import AuthCheck from './AuthCheck'
 import classes from './Home.module.css'
-import { useFormik ,Formik, Form, Field} from "formik";
+import { useFormik ,Formik, Form, useField} from "formik";
 import * as yup from "yup";
-
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import axiosInstance from '../services/axiosInstance'
 
 
-const DummyForm = () => {
+const DummyForm = ({ name = "" }) => {
+  
     const initialFormState = {  name: "", amount: ""  ,category: "", date: "" };
-    const options = [
-        'Select Your Category',
-          "Income",
-          "Expenses",
+    // const options = [
+    //     'Select Your Category',
+    //       "Income",
+    //       "Expenses",
           
-        ];
+    //     ];
+    const token = localStorage.getItem('Token')
+    const[selectedDate,setSelecteDate]=useState(null)
+  
     const { handleSubmit, getFieldProps, touched, errors, isValid } = useFormik({
+      
         initialValues: {
             name: "", amount: ""  ,category: "", date: ""
         },   
@@ -28,66 +34,28 @@ const DummyForm = () => {
         amount: yup
           .number()
           .required("Amount is Required"),
-          date: yup
-           .date()
-          .required("Date is Required"),
+          // date: yup
+          //  .date()
+          // .required("Date is Required"),
          category:yup
          .string()
          .oneOf([ 
-            'Select Your Category',
               "Income",
               "Expenses",
-              
             ])
-            .required("Category is Required"),
+            .required("Type is Required"),
       
       }),    
-      onSubmit: values => {
-        // e.preventDefault();
+      onSubmit: (values)=> {
+        // preventDefault();
         const user=localStorage.getItem('User')
         const userid= JSON.parse(user)
-           axiosInstance.post('http://localhost:4000/expenses/new',{
-    name:values.name,
-    amount:values.amount,
-    category:values.category,
-    date:values.date,
-    
-    UserId: userid.id
-
-
-            
-   }
-   ,{ 'headers': { 'x-auth-token': token } })
-   .then(res=>{
-    window.location.reload();
-    console.log(res.data)
-   })
-      console.log(values)
-   
-      }
-})
-    const [userdata, setUser] = useState(initialFormState);
-  
-    const handleInputChangeAdd = event => {
-        const { name, value } = event.target;
-        setUser({ ...userdata, [name]: value });
-      };
-      const token = localStorage.getItem('Token') //Or however you choose to get it
-    
-      
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const user=localStorage.getItem('User')
-    const userid= JSON.parse(user)
-     
-
-
-  //  axiosInstance.post('http://localhost:4000/expenses/new',{
-  //   name:userdata.name,
-  //   amount:userdata.amount,
-  //   category:userdata.category,
-  //   date:userdata.date,
+        console.log(values);
+  //          axiosInstance.post('http://localhost:4000/expenses/new',{
+  //   name:values.name,
+  //   amount:values.amount,
+  //   category:values.category,
+  //   date:values.date,
     
   //   UserId: userid.id
 
@@ -96,12 +64,16 @@ const DummyForm = () => {
   //  }
   //  ,{ 'headers': { 'x-auth-token': token } })
   //  .then(res=>{
-  //   window.location.reload();
+  //   // window.location.reload();
   //   console.log(res.data)
   //  })
- 
- 
-  };
+
+   
+      }
+})
+
+  
+
   return (<div className={classes.FormContainer}> <form onSubmit={handleSubmit} className={classes.form}>
      
         
@@ -118,36 +90,84 @@ const DummyForm = () => {
  
 
   <label htmlFor='category'>Type</label>
-  <select
-    name="category"
-    {...getFieldProps("category")}
-   
-    >
- <option value="">choose category</option>
- <option value="Expenses">Expenses</option>
- <option value="Income">Income</option>
-    </select>
+           
+  <div class="flex items-center mb-3">
+                    <input type="radio" id="html" 
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  name="category"   
+                      {...getFieldProps("category")}
+                      value="Income"/>
+                  <label for="html">Income</label>
+                </div>
+  <div class="flex items-center mb-3">
+
+                  <input type="radio" id="css"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                
+                name="category"
+                      {...getFieldProps("category")}
+                value="Expenses"/>
+                  <label for="css">Expense</label>
+                </div>
+
+        
+ 
+              
+             
+
+
 
     {touched.category && errors.category ? <small>{errors.category}</small> : null}
    
+                             
+                <label htmlFor="date">       
+                                      Date <br />
+                                </label>
 
-     <label htmlFor="date">
-       
-                      Date <br />
+                        {/* <DatePicker
+                        name='date'
+                                           {...getFieldProps("date")}
+                                  
+                                          onChange={(date) =>{
+                                            console.log(date);
+                                            date.getFieldProps()
+                                          }}
+                        /> */}
+              
+
+
+                        {/* <DatePicker
+                        name='date'
+                        selected={selectedDate}
+                        format='dd/MM/yyyy'
+                        
+                        onChange={
+                          date=>{
+                            setSelecteDate(
+                              date.getFieldProps("date")
+                              // {...getFieldProps("date")}
+                            )
+                            console.log(date.toString())
+                          
+                          
+                          
+                          }
+                        }
+                       /> */}
+
+                        
+
+                  <label htmlFor="date">       
+                          Date <br />
                     </label>
-          <input
-          type='date'
-          name='date'
+                        <input
+                        type='date'
+                        name='date'
+                        {...getFieldProps("date")}
+                        />
          
-
-
-     
-          {...getFieldProps("date")}
-
-          
-      
-            />
-    
+                        
+                         
 
     {touched.date && errors.date ? <small>{errors.date}</small> : null}
 

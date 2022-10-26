@@ -48,10 +48,42 @@ const [data,setData]=useState('')
  const [rowData,setRowData]=useState()
 
 
-  const columns = [{ headerName: "Name", field: "name" },
-  { headerName: "Category", field: "category" },
-  { headerName: "Amount", field: "amount" },
-  { headerName: "Date", field: "date", filter: 'agDateColumnFilter', filterParams: dateFilterParams, }
+  const columns = [
+    { headerName: "Date", field: "date", filter: 'agDateColumnFilter', filterParams: dateFilterParams, },
+    
+    { headerName: "Description", field: "name" },
+  
+  { headerName: "Credit",
+  // , field: "category"
+valueGetter: p=>{
+console.log(p);
+
+
+if ( p.data.category.includes('Income')) {
+  return p.data.amount
+}
+
+}
+
+},
+  
+  { headerName: "Debit", 
+  
+  valueGetter: p=>{
+    console.log(p);
+    
+    
+    if ( p.data.category.includes('Expenses')) {
+      return p.data.amount
+    }
+    
+    }
+
+
+  // field: "amount" 
+
+},
+  
   ]
   const defColumnDefs = { flex: 1, }
 
@@ -65,6 +97,10 @@ const [data,setData]=useState('')
     else if (startDate !== '') return 'greaterThan'
     else if (endDate !== '') return 'lessThan'
   };
+  useEffect(()=>{
+    axiosInstance
+    .get("http://localhost:4000" ,{ 'headers': { 'x-auth-token': token } })
+  })
   useEffect(() => {
     axiosInstance
     .get("http://localhost:4000" ,{ 'headers': { 'x-auth-token': token } })
@@ -73,13 +109,7 @@ const [data,setData]=useState('')
      setRowData(res.data.records)
      console.log(res.data.records)
     
-res.data.records.forEach(
-  record=>{
-    // console.log(moment(record.date).utc().format('DD-MM-YYYY'))
 
-  
-  }
-)
     
     //  console.log(res.data.records[0].date)
  
@@ -102,7 +132,10 @@ res.data.records.forEach(
     }
  
 console.log(startDate,endDate);
-  }, [startDate, endDate])
+  }
+  , 
+  [startDate, endDate]
+  )
   return (
     <AuthCheck>
      
@@ -119,6 +152,8 @@ console.log(startDate,endDate);
           columnDefs={columns}
           defaultColDef={defColumnDefs}
           onGridReady={onGridReady}
+          pagination={true}
+          paginationPageSize={12}
         ></AgGridReact>
       </div>
       

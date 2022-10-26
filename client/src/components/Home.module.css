@@ -215,7 +215,7 @@ body{
     font-size: 16px;
     /* margin: 10px 0 30px; */
     padding: 10px;
-    width: 42%;
+    width: 45%;
   }
   .date {
   margin-left: 120px ;
@@ -280,12 +280,100 @@ margin-bottom: 15px;
       }
       .report{
         white-space: pre;
-  width: 100%;
+  width: 95%;
   border-radius: 10px;
+  margin-left: 30px;
       }
       .FormContainer{
         width: 125%;
       }
+      .btn{
+  border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-left: 30px;
+  width: 82%;
+
+      }
 
      
+}
+
+@media screen and (max-width: 930px){
+  .money {
+    font-size: 30px;
+    }
+   
+    .incexpcontainer{
+      width: 100%;
+      margin-top: 30px;
+    }
+    .form{
+    width: 200%;
+margin-left: 30px;
+    }
+    h3{
+      white-space: pre;
+      margin-right: 100px;
+    }
+    .report{
+      white-space: pre;
+width: 95%;
+border-radius: 10px;
+margin-left: 30px;
+    }
+    .FormContainer{
+      width: 125%;
+    }
+    .btn{
+border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-left: auto;
+margin-right: auto;
+width: 82%;
+
+    }
+
+}
+@media screen and (max-width: 360px){
+  .money {
+    font-size: 25px;
+    }
+   
+    .incexpcontainer{
+      width: 90%;
+      margin-top: 30px;
+    }
+    .form{
+    width: 70%;
+margin-left: 20px;
+    }
+    h3{
+      white-space: pre;
+      margin-right: 100px;
+    }
+    .report{
+      white-space: pre;
+width: 75%;
+border-radius: 10px;
+margin-left: 30px;
+    }
+    .FormContainer{
+      width: 125%;
+    }
+    .btn{
+border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-left: auto;
+margin-right: auto;
+width: 82%;
+
+    }
+
+
 }

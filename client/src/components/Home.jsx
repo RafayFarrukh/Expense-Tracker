@@ -12,7 +12,7 @@ const Home = () => {
   const [balance,setBalance]=useState()
   const [amount,setAmount]=useState(0);
   const [name, setname] = useState("");
-  
+  const [report,setReport]=useState(false)
   const [category, setType] = useState("Income");
   const [date,setDate]=useState()
   const [formErrors, setFormErrors] = useState({});
@@ -76,7 +76,36 @@ const [expense,setExpense]=useState(0);
       <div className={classes.container}>
       <div className={classes.maincontainer}>
       <h4 className={classes.yourbalance}>Your Balance </h4>
-      <h1 className={classes.money}>${balance}</h1>
+       {balance>0? 
+        <h1 className={classes.money}>{balance>0&&balance}$</h1>
+       
+:(
+  <div>
+     <h1 className={classes.money} 
+       style={
+        {
+          color:'red'
+        }
+      }
+    
+      >
+       
+        {balance}$</h1>
+  </div>
+)
+}
+
+      {/* <h1 className={classes.money}>${balance>0&&balance}</h1>
+      <h1 className={classes.money} 
+       style={
+        {
+          color:'red'
+        }
+      }
+    
+      >
+       
+        ${balance }</h1> */}
       <div className={classes.incexpcontainer}>
         
           <div className={classes.Income}>
@@ -90,6 +119,7 @@ const [expense,setExpense]=useState(0);
       </div>
      
     </div>
+    { report}
     
       <h3>Add new transaction</h3>
       
@@ -97,6 +127,7 @@ const [expense,setExpense]=useState(0);
      <DummyForm/>
             <button className={classes.report} onClick={()=>{
               navigate('/report')
+              setReport(true)
               window.location.reload()
             }}>Check Report</button>
 

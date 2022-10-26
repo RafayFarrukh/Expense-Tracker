@@ -25,9 +25,9 @@ module.exports = {
         })
         
         
-
+ 
      const record= await newRecord.save()
-          res.status(200).json(record)
+          res.status(200).json(record) 
 
  
    // const element = array[index];
