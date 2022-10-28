@@ -1,11 +1,13 @@
 import AuthCheck from './AuthCheck'
 import React, {useCallback, useEffect, useState,useMemo,useRef } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+import { AgGridReact,AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
 import axiosInstance from '../services/axiosInstance'
 import moment, * as moments from 'moment';
+
+
 const dateFilterParams = {
   comparator: function (filterLocalDateAtMidnight, cellValue) {
     var dateAsString = cellValue;
@@ -35,15 +37,7 @@ const [data,setData]=useState('')
   const [gridApi, setGridApi] = useState()
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  // const rowData = [
-  //   { name: "Toyota", category: "Celica", amount: 35000, date: "09-02-2022" },
-  //   { name: "Ford", category: "Mondeo", amount: 32000, date: "11-02-2022" },
-  //   { name: "Porsche", category: "Boxter", amount: 72000, date: "10-02-2022" },
-  //   { name: "rafay3", category: "Mers", amount: 92000, date: "2022-12-10" },
-  //   { name: "rafay1", category: "Mers", amount: 92000, date: "12-09-2022" },
-  //   { name: "rafay2", category: "Mers", amount: 92000, date: "2022-09-19" }
-  // ];
- 
+  const balance=useRef(0);
 
  const [rowData,setRowData]=useState()
 
@@ -78,11 +72,28 @@ if ( p.data.category.includes('Income')) {
     }
     
     }
+}, 
+{ 
+   headerName: "Balance",
+   valueGetter: p=>{
+    const b=p.data.amount
+    if (p.data.category=='Income') {
+  
+    balance.current=balance.current+b
+   
+       
+      
+      return balance.current
+    }
+    else{
+      balance.current=balance.current-b
+      return balance.current
+
+    }
+    }
+ },
 
 
-  // field: "amount" 
-
-},
   
   ]
   const defColumnDefs = { flex: 1, }
@@ -138,16 +149,20 @@ console.log(startDate,endDate);
   )
   return (
     <AuthCheck>
-     
-     <div className="ag-theme-alpine" style={{ height: 600 }}>
-      <div className='flex'>
-     From : <input type="date"
-     
+     <div className='mt-6 mb-6'>
+     <div className="ag-theme-alpine " style={{ height: 600 }}>
+      <div className='flex mb-6  justify-center   items-center '>
+      
+     From : &nbsp;  <input type="date"
+     className='flex  items-center '
          value={startDate}
-          onChange={e => setStartDate(e.target.value)} />
-        To : <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
+          onChange={e => setStartDate(e.target.value)} />  &nbsp; 
+        To :  &nbsp; <input type="date"
+        className='flex items-center '
+        value={endDate} onChange={e => setEndDate(e.target.value)} />
         </div>
         <AgGridReact
+        style={{ width: '100%', height: '100%;' }}
           rowData={rowData}
           columnDefs={columns}
           defaultColDef={defColumnDefs}
@@ -155,6 +170,8 @@ console.log(startDate,endDate);
           pagination={true}
           paginationPageSize={12}
         ></AgGridReact>
+       
+      </div>
       </div>
       
     </AuthCheck>

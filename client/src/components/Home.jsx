@@ -6,6 +6,7 @@ import axiosInstance from '../services/axiosInstance'
 import { useNavigate } from "react-router-dom";
 import Form from './Form'
 import DummyForm from './DummyForm'
+import DummyForm2 from './DummyForm2'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -124,7 +125,8 @@ const [expense,setExpense]=useState(0);
       <h3>Add new transaction</h3>
       
      {/* <Form/> */}
-     <DummyForm/>
+     {/* <DummyForm/> */}
+     <DummyForm2/>
             <button className={classes.report} onClick={()=>{
               navigate('/report')
               setReport(true)

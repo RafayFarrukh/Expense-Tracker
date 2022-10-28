@@ -9,22 +9,20 @@ import 'react-datepicker/dist/react-datepicker.css'
 import axiosInstance from '../services/axiosInstance'
 
 
-const DummyForm = ({ name = "" }) => {
+
+const DummyForm = () => {
   
     const initialFormState = {  name: "", amount: ""  ,category: "", date: "" };
-    // const options = [
-    //     'Select Your Category',
-    //       "Income",
-    //       "Expenses",
-          
-    //     ];
+
     const token = localStorage.getItem('Token')
     const[selectedDate,setSelecteDate]=useState(null)
   
-    const { handleSubmit, getFieldProps, touched, errors, isValid } = useFormik({
+    const { handleSubmit
+      , getFieldProps,
+       touched, errors, isValid } = useFormik({
       
         initialValues: {
-            name: "", amount: ""  ,category: "", date: ""
+            name: "", amount: ""  ,category: "",  date: new Date()
         },   
     validationSchema: yup.object({
         name: yup
@@ -124,40 +122,19 @@ const DummyForm = ({ name = "" }) => {
                                       Date <br />
                                 </label>
 
-                        {/* <DatePicker
-                        name='date'
-                                           {...getFieldProps("date")}
-                                  
-                                          onChange={(date) =>{
-                                            console.log(date);
-                                            date.getFieldProps()
-                                          }}
-                        /> */}
-              
+                              
+               
 
 
-                        {/* <DatePicker
+                        <DatePicker
                         name='date'
-                        selected={selectedDate}
-                        format='dd/MM/yyyy'
-                        
-                        onChange={
-                          date=>{
-                            setSelecteDate(
-                              date.getFieldProps("date")
-                              // {...getFieldProps("date")}
-                            )
-                            console.log(date.toString())
-                          
-                          
-                          
-                          }
-                        }
-                       /> */}
+                        {...getFieldProps('date')}
+
+                       />
 
                         
 
-                  <label htmlFor="date">       
+                  {/* <label htmlFor="date">       
                           Date <br />
                     </label>
                         <input
@@ -165,7 +142,7 @@ const DummyForm = ({ name = "" }) => {
                         name='date'
                         {...getFieldProps("date")}
                         />
-         
+          */}
                         
                          
 
