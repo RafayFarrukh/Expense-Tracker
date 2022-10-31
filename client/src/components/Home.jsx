@@ -10,7 +10,7 @@ import DummyForm2 from './DummyForm2'
 
 const Home = () => {
   const navigate = useNavigate();
-  const [balance,setBalance]=useState()
+  const [balance,setBalance]=useState(0)
   const [amount,setAmount]=useState(0);
   const [name, setname] = useState("");
   const [report,setReport]=useState(false)
@@ -93,6 +93,11 @@ const [expense,setExpense]=useState(0);
        
         {balance}$</h1>
   </div>
+)?(
+  <h1 className={classes.money}>{balance}$</h1>
+):(
+  <h1 className={classes.money}>{balance}$</h1>
+
 )
 }
 

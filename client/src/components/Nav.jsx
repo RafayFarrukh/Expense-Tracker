@@ -142,8 +142,8 @@ function Nav() {
                           e.preventDefault();
                           localStorage.removeItem("Token");
                           localStorage.removeItem("User");
-                          // window.location.reload("/");
-                        navigate("/login")
+                          window.location.replace("/login");
+                        // navigate("/login")
                         
 
                         }}

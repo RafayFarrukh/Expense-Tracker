@@ -7,6 +7,7 @@ import axiosInstance from '../services/axiosInstance'
 
 import React from "react";
 import DatePicker from "./DatePicker";
+import { useEffect,useState } from "react";
 const validationSchema = Yup.object().shape({
  
   name: Yup.string().required("Description is Required"),
@@ -14,9 +15,12 @@ const validationSchema = Yup.object().shape({
   category: Yup.string().required("Type is Required"),
   date: Yup.date().required("Date is Required")
 });
-const token = localStorage.getItem('Token')
+
 const DummyForm2 = () => {
-  
+
+  const token = localStorage.getItem('Token')
+
+
   return (
     <Formik
       initialValues={{
@@ -31,7 +35,7 @@ const DummyForm2 = () => {
 
         const user=localStorage.getItem('User')
         const userid= JSON.parse(user)
-        console.log(values);
+       
            axiosInstance.post('http://localhost:4000/expenses/new',{
     name:values.name,
     amount:values.amount,
@@ -45,9 +49,17 @@ const DummyForm2 = () => {
    }
    ,{ 'headers': { 'x-auth-token': token } })
    .then(res=>{
-    window.location.reload();
+    // window.location.reload();
     console.log(res.data)
    })
+   .then(()=>{
+         
+                window.location.reload();
+        
+   
+   }
+
+   )
 
         console.log({
           name:values.name,
@@ -82,7 +94,7 @@ const DummyForm2 = () => {
             <div class="flex items-center mb-3">
             <label>
               <Field type="radio"    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" name="category" value="Expenses" />
-              Expense
+              &nbsp;  Expense
             </label>
             </div>
             <div class="flex items-center mb-3">
@@ -91,7 +103,7 @@ const DummyForm2 = () => {
               <Field type="radio"
                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               name="category" value="Income" />
-              Income
+             &nbsp; Income
             </label>
             </div>
     {touched.category && errors.category ? <small>{errors.category}</small> : null}

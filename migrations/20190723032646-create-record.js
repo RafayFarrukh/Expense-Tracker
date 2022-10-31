@@ -33,7 +33,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-   
+      currentBalance: {
+        type: Sequelize.INTEGER
+      }
     });
   },
   down: (queryInterface, Sequelize) => {
