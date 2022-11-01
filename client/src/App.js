@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 
-import Nav from './components/Nav';
+import Nav from './components/Navbar/Nav';
 import Login from './components/Login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from './components/SignUp';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import { ToastContainer,toast } from 'react-toastify'
 import Report from './components/Report';
 import Dashboard from './components/Dashboard';

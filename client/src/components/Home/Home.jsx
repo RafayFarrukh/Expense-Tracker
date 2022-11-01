@@ -1,12 +1,12 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
-import AuthCheck from './AuthCheck'
+import AuthCheck from '../AuthCheck'
 import classes from './Home.module.css'
-import axiosInstance from '../services/axiosInstance'
+import axiosInstance from '../../services/axiosInstance'
 import { useNavigate } from "react-router-dom";
-import Form from './Form'
-import DummyForm from './DummyForm'
-import DummyForm2 from './DummyForm2'
+import Form from '../notUsedForms/Form'
+import DummyForm from '../notUsedForms/DummyForm'
+import DummyForm2 from '../DummyForm2'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -35,21 +35,9 @@ const [expense,setExpense]=useState(0);
       .get("http://localhost:4000" ,{ 'headers': { 'x-auth-token': token } })
       .then((res)=>{
         
-              setIncome(res.data.chartData[1])
-              setExpense(res.data.chartData[0])
-                  var result = res.data.records.find(item => item.UserId);
-                  console.log(result.UserId);
-              const user=localStorage.getItem('User')
-              const userid= JSON.parse(user)
-
-                          
-                    if (result.UserId==userid.id) {
-                      setBalance(
-                        res.data.totalAmount
-              
-                          )
-                 
-                    }
+        setIncome(res.data.chartData[0])
+        setExpense(res.data.chartData[1])
+        setBalance(res.data.totalAmount)
 
       }
       )

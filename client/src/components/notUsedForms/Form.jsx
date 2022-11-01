@@ -1,9 +1,9 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
-import AuthCheck from './AuthCheck'
-import classes from './Home.module.css'
+import AuthCheck from '../AuthCheck'
+import classes from '../Home/Home.module.css'
 import {useForm} from 'react-hook-form'
-import axiosInstance from '../services/axiosInstance'
+import axiosInstance from '../../services/axiosInstance'
 
 
 const Form = () => {

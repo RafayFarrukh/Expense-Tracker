@@ -1,6 +1,6 @@
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
-import classes from './Home.module.css'
+import classes from './Home/Home.module.css'
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import axiosInstance from '../services/axiosInstance'
@@ -72,16 +72,9 @@ const DummyForm2 = () => {
     >
       {(props) => {
         const {
-          values,
           touched,
           errors,
-          dirty,
-          isSubmitting,
-          handleChange,
-          handleBlur,
           handleSubmit,
-          handleReset,
-          setFieldValue
         } = props;
         return (
 

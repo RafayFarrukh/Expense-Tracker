@@ -54,14 +54,4 @@ db.Record.belongsTo(
 }
   )
 
-//   User.hasMany(Shop, {
-//     foreignKey: 'userId',
-//     onDelete: "CASCADE",
-// })
-// Shop.belongsTo(User, {
-//     foreignKey: 'userId',
-// })
-
-
-
 module.exports = db;

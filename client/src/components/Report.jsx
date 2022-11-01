@@ -6,6 +6,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
 import axiosInstance from '../services/axiosInstance'
 import moment, * as moments from 'moment';
+import DatePicker from "react-datepicker";
 
 
 const dateFilterParams = {
@@ -33,11 +34,9 @@ const dateFilterParams = {
 const token = localStorage.getItem('Token') //Or however you choose to get it
 
 const Report = () => {
-const [data,setData]=useState('')
   const [gridApi, setGridApi] = useState()
-  const [startDate, setStartDate] = useState('');
+  const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState('');
-  const balance=useRef(0);
 
  const [rowData,setRowData]=useState()
 
@@ -111,22 +110,13 @@ if ( p.data.category.includes('Income')) {
     else if (startDate !== '') return 'greaterThan'
     else if (endDate !== '') return 'lessThan'
   };
-  useEffect(()=>{
-    axiosInstance
-    .get("http://localhost:4000" ,{ 'headers': { 'x-auth-token': token } })
-  })
+
   useEffect(() => {
     axiosInstance
     .get("http://localhost:4000" ,{ 'headers': { 'x-auth-token': token } })
    .then((res)=>{
-  //  console.log(moment(res.data.records[0].date.utc().format('YYYY-MM-DD')))
      setRowData(res.data.records)
      console.log(res.data.records)
-    
-
-    
-    //  console.log(res.data.records[0].date)
- 
    })
    
     if (gridApi) {
@@ -144,8 +134,7 @@ if ( p.data.category.includes('Income')) {
       }
 
     }
- 
-console.log(startDate,endDate);
+    console.log(startDate);
   }
   , 
   [startDate, endDate]
@@ -156,10 +145,13 @@ console.log(startDate,endDate);
      <div className="ag-theme-alpine " style={{ height: 600 }}>
       <div className='flex mb-6  justify-center   items-center '>
       
-     From : &nbsp;  <input type="date"
+     From : &nbsp;  
+
+     <input type="date"
      className='flex  items-center '
          value={startDate}
-          onChange={e => setStartDate(e.target.value)} />  &nbsp; 
+          onChange={e => setStartDate(e.target.value)} /> 
+           &nbsp; 
         To :  &nbsp; <input type="date"
         className='flex items-center '
         value={endDate} onChange={e => setEndDate(e.target.value)} />

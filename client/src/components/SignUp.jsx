@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer,toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import { useFormik } from "formik";
-import classes from './Home.module.css'
+import classes from './Home/Home.module.css'
 import * as yup from "yup";
 
 const Signup = () => {

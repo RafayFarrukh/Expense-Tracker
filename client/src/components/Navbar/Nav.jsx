@@ -87,6 +87,12 @@ function Nav() {
                         <Link
                             to='/report'
                             className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                            onClick={() => {
+                            navigate('/report')
+                             window.location.reload()
+                            
+    
+                            }}
                         >
                             Report
                         </Link>
@@ -251,6 +257,12 @@ function Nav() {
                 <Link
                     to='/report'
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  onClick={() => {
+                    navigate('/report')
+                     window.location.reload()
+                    
+
+                    }}
                 >
                   Report
                 </Link>

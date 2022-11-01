@@ -1,12 +1,12 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
-import AuthCheck from './AuthCheck'
-import classes from './Home.module.css'
+import AuthCheck from '../AuthCheck'
+import classes from '../Home/Home.module.css'
 import { useFormik ,Formik, Form, useField} from "formik";
 import * as yup from "yup";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import axiosInstance from '../services/axiosInstance'
+import axiosInstance from '../../services/axiosInstance'
 
 
 
