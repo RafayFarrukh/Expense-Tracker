@@ -1,9 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import Popper from "popper.js";
-import { Link, useLocation,useNavigate } from "react-router-dom";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,51 +13,44 @@ function Nav() {
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
     new Popper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start"
+      placement: "bottom-start",
     });
     setDropdownPopoverShow(true);
   };
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
-  const [user,setUser]=useState();
-  const User=()=>{
- const user1=    localStorage.getItem('User')
- const user2=JSON.parse(user1)
+  const [user, setUser] = useState();
+  const User = () => {
+    const user1 = localStorage.getItem("User");
+    const user2 = JSON.parse(user1);
 
- setUser(user2.name)
-//  console.log(user2.name)
-//  console.log(user2);
-  }
-  useEffect(
-   ()=>{
-    if ( localStorage.getItem('Token')) {
-      const user1=    localStorage.getItem('User')
-      const user2=JSON.parse(user1)
-     
-      setUser(user2.name)
-     }
+    setUser(user2.name);
+    //  console.log(user2.name)
+    //  console.log(user2);
+  };
+  useEffect(() => {
+    if (localStorage.getItem("Token")) {
+      const user1 = localStorage.getItem("User");
+      const user2 = JSON.parse(user1);
+
+      setUser(user2.name);
     }
-   
-  )
+  });
   return (
     <div>
       <nav className="bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
- 
+          <div className=" text-white flex justify-start relative gap-x-2">
+            <img
+              className="absolute h-16 w-8  inline-block "
+              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+              alt="Workflow"
+            />
+            <h1 className="absolute mt-5 ml-10 ">Expense Tracker</h1>
+          </div>
 
-             <div className=" text-white flex justify-start relative gap-x-2">
-                  <img
-                      className="absolute h-16 w-8  inline-block "
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                      alt="Workflow"
-                    />
-                    <h1 className="absolute mt-5 ml-10 ">Expense Tracker</h1>
-               </div> 
-       
-          
           <div className="flex items-center justify-end h-16">
-
             <div className="flex items-center justify-end">
               <div className="flex-shrink-0">
                 {/* <img
@@ -66,37 +58,30 @@ function Nav() {
                   src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                   alt="Workflow"
                 /> */}
-                
               </div>
               {/* <h1 className="m-4 text-white flex justify-start ">Expense Tracker</h1> */}
               <div className="hidden md:block   flex  justify-end  ">
-       
                 <div className="ml-10 flex items-baseline space-x-8   justify-end">
+                  {localStorage.getItem("User") ? (
+                    <>
+                      <Link
+                        to="/home"
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      >
+                        Home
+                      </Link>
 
-                        {localStorage.getItem("User") ? (
-                            <>
-                            
-                            <Link
-                            to="/home"
-
-                            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                            Home
-                        </Link>
-
-                        <Link
-                            to='/report'
-                            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                            onClick={() => {
-                            navigate('/report')
-                             window.location.reload()
-                            
-    
-                            }}
-                        >
-                            Report
-                        </Link>
-                        {/* <Link
+                      <Link
+                        to="/report"
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        onClick={() => {
+                          navigate("/report");
+                          window.location.reload();
+                        }}
+                      >
+                        Report
+                      </Link>
+                      {/* <Link
                         
                              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 
@@ -112,76 +97,58 @@ function Nav() {
                             >
                             Logout
                             </Link> */}
-                                      
-                                      <Link
-                                          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 
-                      // style={{ transition: "all 5s ease" }}
-                      // type="li"
-                      ref={btnDropdownRef}
-                      onClick={() => {
-                        dropdownPopoverShow
-                          ? closeDropdownPopover()
-                          : openDropdownPopover();
-                      }}
-                        >
-                      
-                    {user}
-                      
-                      <ArrowDropDownIcon/>
-                              </Link>
-                    <div
-                      ref={popoverDropdownRef}
-                      className={
-                        (dropdownPopoverShow ? "block "
-                        : "hidden ") 
-                      
-                      }
-                      style={{ minWidth: "8rem" }}
-                    >
-                  
                       <Link
-                        to="/login"
-                        className="block mt-2  -ml-6 text-black bg-gray-500 text-white px-1 py-2  w-1/2 rounded-md text-sm font-medium"
-
-                        onClick={(e) => {
-                          e.preventDefault();
-                          localStorage.removeItem("Token");
-                          localStorage.removeItem("User");
-                          window.location.replace("/login");
-                        // navigate("/login")
-                        
-
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        // style={{ transition: "all 5s ease" }}
+                        // type="li"
+                        ref={btnDropdownRef}
+                        onClick={() => {
+                          dropdownPopoverShow
+                            ? closeDropdownPopover()
+                            : openDropdownPopover();
                         }}
                       >
-                        Logout
+                        {user}
+
+                        <ArrowDropDownIcon />
                       </Link>
-                      </div>        
-
-
-                            
-                            </>
-                        ):(
-                            <>
-                            
-                            <Link
-                            to="/login"
-
-                            className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                            Login
-                        </Link>
+                      <div
+                        ref={popoverDropdownRef}
+                        className={dropdownPopoverShow ? "block " : "hidden "}
+                        style={{ minWidth: "8rem" }}
+                      >
                         <Link
-                            to="/signup"
-
-                            className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+                          to="/login"
+                          className="block mt-2  -ml-6 text-black bg-gray-500 text-white px-1 py-2  w-1/2 rounded-md text-sm font-medium"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            localStorage.removeItem("Token");
+                            localStorage.removeItem("User");
+                            window.location.replace("/login");
+                            // navigate("/login")
+                          }}
                         >
-                            Signup
+                          Logout
                         </Link>
-                            
-                            </>
-                        )}
-                               
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        to="/login"
+                        className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        to="/signup"
+                        className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+                      >
+                        Signup
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -243,77 +210,61 @@ function Nav() {
         >
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
-             <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {localStorage.getItem("User") ? (
-                    <>
-
-                <Link
-                    to="/home"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Home
-                </Link>
-
-                <Link
-                    to='/report'
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => {
-                    navigate('/report')
-                     window.location.reload()
-                    
-
-                    }}
-                >
-                  Report
-                </Link>
-
-                <Link
-               
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    localStorage.removeItem("Token");
-                    localStorage.removeItem("User");
-                   navigate("/login")
-
-                  }}
-                >
-                  Logout
-                </Link>
-
-                    </>
-                ):(
-                    <>
-                    
+                  <>
                     <Link
-                                      to='/login'
+                      to="/home"
+                      className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Home
+                    </Link>
 
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Login
-                </Link>
+                    <Link
+                      to="/report"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                      onClick={() => {
+                        navigate("/report");
+                        window.location.reload();
+                      }}
+                    >
+                      Report
+                    </Link>
 
-                <Link
-                                  to='/signup'
+                    <Link
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        localStorage.removeItem("Token");
+                        localStorage.removeItem("User");
+                        navigate("/login");
+                      }}
+                    >
+                      Logout
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Login
+                    </Link>
 
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Signup
-                </Link>
-                    
-                    </>
+                    <Link
+                      to="/signup"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Signup
+                    </Link>
+                  </>
                 )}
-
-
-            
               </div>
             </div>
           )}
         </Transition>
       </nav>
-
-    
-    
     </div>
   );
 }

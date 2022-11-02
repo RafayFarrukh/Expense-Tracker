@@ -6,7 +6,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
 import axiosInstance from '../services/axiosInstance'
 import moment, * as moments from 'moment';
-import DatePicker from "react-datepicker";
+
 
 
 const dateFilterParams = {
@@ -127,7 +127,8 @@ if ( p.data.category.includes('Income')) {
         var dateFilterComponent = gridApi.api.getFilterInstance('date');
         dateFilterComponent.setModel({
           type: getFilterType(),
-          dateFrom: startDate ? startDate : endDate,
+          dateFrom: startDate
+          ? startDate : endDate,
           dateTo: endDate,
         });
         gridApi.api.onFilterChanged();

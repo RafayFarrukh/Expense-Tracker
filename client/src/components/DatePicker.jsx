@@ -7,14 +7,13 @@ import { useFormikContext } from "formik";
 const DatePickerField = props => {
   const { setFieldValue } = useFormikContext();
   const { value, name } = props;
-  console.log("--", moment(value).format("DD/MM/YYYY"));
+  console.log("--", moment(value).format("DD-MM-YYYY"));
 
-  // return <input className="my-custom-input" type="text" {...props} />;
   return (
     <DatePicker
     dateFormat="yyyy-MM-dd"
-    //   selected={(value && new Date(value)) || null}
-      selected={(moment(value).format("DD/MM/YYYY") && new Date(value)) || null}
+      // selected={(value && new Date(value)) || null}
+      selected={(moment(value).format("DD-MM-YYYY") && new Date(value)) || null}
       onChange={val => {
         console.log(val);
         // return props.onChange(name)(val)

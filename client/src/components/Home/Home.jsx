@@ -120,11 +120,11 @@ const [expense,setExpense]=useState(0);
      {/* <Form/> */}
      {/* <DummyForm/> */}
      <DummyForm2/>
-            <button className={classes.report} onClick={()=>{
+            {/* <button className={classes.report} onClick={()=>{
               navigate('/report')
               setReport(true)
               window.location.reload()
-            }}>Check Report</button>
+            }}>Check Report</button> */}
 
       </div>
       </div>
