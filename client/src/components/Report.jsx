@@ -72,25 +72,7 @@ if ( p.data.category.includes('Income')) {
     
     }
 }, 
-// { 
-//    headerName: "Balance",
-//    valueGetter: p=>{
-//     const b=p.data.amount
-//     if (p.data.category=='Income') {
-  
-//     balance.current=balance.current+b
-   
-       
-      
-//       return balance.current
-//     }
-//     else{
-//       balance.current=balance.current-b
-//       return balance.current
 
-//     }
-//     }
-//  },
 { 
    headerName: "Current Balance",
    field:"currentBalance"

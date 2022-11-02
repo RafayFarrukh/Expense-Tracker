@@ -43,12 +43,7 @@ const Signup = () => {
     
     }),
     onSubmit: values => {
-      // const registerData = {
-      //   email: values.email.toLocaleLowerCase(),
-      //   password: values.password,
-      //   name: values.name
-          
-      // };
+
       axios
       .post("http://localhost:4000/users/register", {
         name:values.name,
@@ -56,18 +51,18 @@ const Signup = () => {
         password:values.password,
       })
       .then((resp) => {
-        console.log(resp.data.user) 
+  
         toast.success('Successfully SignedUp',{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
         navigate('/login')
       })
       .catch((res) => {
-        console.log(res);
+    
         if(res.response.data.success==false){
           toast.error(res.response.data.error,{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
          }
       }
       );
-      // console.log(registerData);
+
     }
   });
 

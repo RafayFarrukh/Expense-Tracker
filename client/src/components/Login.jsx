@@ -58,34 +58,7 @@ const Login = () => {
       
     }
   });
- 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-   
-  //   axios
-  //     .post("http://localhost:4000/users/login", {
-  //       email:email,
-  //       password:password,
-  //     })
-  //     .then((resp) => {
-  //       localStorage.setItem("Token", resp.data.token);
-  //       localStorage.setItem("User", JSON.stringify(resp.data.user));       
-  //       navigate('/home')
-  //      console.log(resp.data.user) 
-  //      toast.success('Successfully Logged in',{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
 
-  //     })
-
-     
-  //     .catch((res) => {
-  //     console.log(res.response.data);
-  //  if(res.response.data.success==false){
-  //   toast.error(res.response.data.error,{position: toast.POSITION.TOP_RIGHT,autoClose: 2000})
-  //  }
-       
-      
-  //     });
-  // };
   return (
     <>
   

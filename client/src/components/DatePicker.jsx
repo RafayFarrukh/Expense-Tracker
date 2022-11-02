@@ -7,7 +7,7 @@ import { useFormikContext } from "formik";
 const DatePickerField = props => {
   const { setFieldValue } = useFormikContext();
   const { value, name } = props;
-  console.log("--", moment(value).format("DD-MM-YYYY"));
+ 
 
   return (
     <DatePicker

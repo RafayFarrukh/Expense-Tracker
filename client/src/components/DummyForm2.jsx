@@ -53,13 +53,7 @@ const DummyForm2 = () => {
             window.location.reload();
           });
 
-        console.log({
-          name: values.name,
-          category: values.category,
-          // date:values.date,
-          date: moment(values.date).format("YYYY-MM-DD"),
-          amount: values.amount,
-        });
+      
       }}
     >
       {(props) => {
