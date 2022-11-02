@@ -7,7 +7,6 @@ import axiosInstance from "../services/axiosInstance";
 
 import React from "react";
 import DatePicker from "./DatePicker";
-import { useEffect, useState } from "react";
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Description is Required"),
   amount: Yup.number().required("Amount is Required"),
@@ -45,15 +44,10 @@ const DummyForm2 = () => {
             },
             { headers: { "x-auth-token": token } }
           )
-          .then((res) => {
-            // window.location.reload();
-            console.log(res.data);
-          })
+
           .then(() => {
             window.location.reload();
           });
-
-      
       }}
     >
       {(props) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import Popper from "popper.js";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 function Nav() {
@@ -21,14 +21,7 @@ function Nav() {
     setDropdownPopoverShow(false);
   };
   const [user, setUser] = useState();
-  const User = () => {
-    const user1 = localStorage.getItem("User");
-    const user2 = JSON.parse(user1);
 
-    setUser(user2.name);
-    //  console.log(user2.name)
-    //  console.log(user2);
-  };
   useEffect(() => {
     if (localStorage.getItem("Token")) {
       const user1 = localStorage.getItem("User");
@@ -52,14 +45,8 @@ function Nav() {
 
           <div className="flex items-center justify-end h-16">
             <div className="flex items-center justify-end">
-              <div className="flex-shrink-0">
-                {/* <img
-                  className="h-8 w-8"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                  alt="Workflow"
-                /> */}
-              </div>
-              {/* <h1 className="m-4 text-white flex justify-start ">Expense Tracker</h1> */}
+              <div className="flex-shrink-0"></div>
+
               <div className="hidden md:block   flex  justify-end  ">
                 <div className="ml-10 flex items-baseline space-x-8   justify-end">
                   {localStorage.getItem("User") ? (
@@ -81,27 +68,9 @@ function Nav() {
                       >
                         Report
                       </Link>
-                      {/* <Link
-                        
-                             className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-
-                            onClick={(e) => {
-                                e.preventDefault();
-                                localStorage.removeItem("Token");
-                                localStorage.removeItem("User");
-                                // window.location.reload("/");
-                            navigate("/login")
-                            
-            
-                            }}
-                            >
-                            Logout
-                            </Link> */}
 
                       <Link
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                        // style={{ transition: "all 5s ease" }}
-                        // type="li"
                         ref={btnDropdownRef}
                         onClick={() => {
                           dropdownPopoverShow
