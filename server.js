@@ -28,7 +28,7 @@ app.use("/", apiauth, homeRoutes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-let port = 4000;
+let port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Running at localhost:${port}`);
 });
