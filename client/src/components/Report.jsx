@@ -87,7 +87,7 @@ const Report = () => {
     axiosInstance
       // .get("http://localhost:4000/home", { headers: { "x-auth-token": token } })
 
-      .get("/", { headers: { "x-auth-token": token } })
+      .get("/home", { headers: { "x-auth-token": token } })
       .then((res) => {
         setRowData(res.data.records);
       });
