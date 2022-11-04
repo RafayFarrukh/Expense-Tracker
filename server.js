@@ -1,6 +1,8 @@
 const express = require("express");
 const mysql = require("mysql");
 const app = express();
+const dotenv = require("dotenv");
+
 const apiauth = require("./middlewares/apiauth");
 const userRoutes = require("./routes/user");
 const expenseRoutes = require("./routes/expense");
@@ -15,17 +17,17 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.static(path.join(__dirname, "client/build")));
 app.get("*", (req, res) => {
-  // Serve index.html file if it doesn't recognize the route
-  // res.sendFile(path.resolve(__dirname, "Tailwind/build", "index.html")); // <- Here !
   res.sendFile(path.resolve(__dirname, "./client/build/index.html")); // <- Here !
 });
 app.use(bodyParser.json());
-// for parsing application/xwww-
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/users", userRoutes);
 app.use("/expenses", apiauth, expenseRoutes);
 app.use("/", apiauth, homeRoutes);
-
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 let port = 4000;
 app.listen(port, () => {
   console.log(`Running at localhost:${port}`);
