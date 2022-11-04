@@ -1,25 +1,26 @@
 {
   "development": {
-    "username": "root",
-    "password": "Rafay123",
-    "database": "expensetracker",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
+    "username": "expense",
+    "password": "qwerty@123",
+    "database": "ExpenseTracker",
+    "host": "rpm-production.czih5awhgox0.us-east-2.rds.amazonaws.com",
+    "dialect": "mssql"
+  }
+  ,
   "test": {
-    "username": "root",
-    "password": "Rafay123",
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "username": "expense",
+    "password": "qwerty@123",
+    "database": "ExpenseTracker",
+    "host": "rpm-production.czih5awhgox0.us-east-2.rds.amazonaws.com",
+    "dialect": "mssql",
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": "Rafay123",
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "username": "expense",
+    "password": "qwerty@123",
+    "database": "ExpenseTracker",
+    "host": "rpm-production.czih5awhgox0.us-east-2.rds.amazonaws.com",
+    "dialect": "mssql",
     "operatorsAliases": false
   }
 }

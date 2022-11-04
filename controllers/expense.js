@@ -12,8 +12,8 @@ module.exports = {
       where: { UserId: req.user.userID },
       order: [["id", "DESC"]],
     });
-    // SELECT * FROM `records` where userID = 1 order by ID Desc limit 1;
-    if (records == "") {
+    console.log(records);
+    if (records == null) {
       const newRecord = await new Record({
         name: name,
         category: category,
@@ -24,7 +24,7 @@ module.exports = {
       });
       const record = await newRecord.save();
       res.status(201).json({ record });
-    } else {
+    } else if (records !== "") {
       const newRecord = await new Record({
         name: name,
         category: category,

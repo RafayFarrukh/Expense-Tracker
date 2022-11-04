@@ -31,7 +31,7 @@ const Signup = () => {
       password: yup
         .string()
         .required("Password is Required")
-        .matches(/(?=[a-zA-Z])/, "A senha deve conter ao menos 1 letra")
+        .matches(/(?=[a-zA-Z])/, "A Password Must contain atleast 1 Character")
 
         .min(5, "Password must be atleast 5 characters"),
     }),
@@ -50,7 +50,7 @@ const Signup = () => {
           navigate("/login");
         })
         .catch((res) => {
-          if (res.response.data.success == false) {
+          if (res.response.data.success === false) {
             toast.error(res.response.data.error, {
               position: toast.POSITION.TOP_RIGHT,
               autoClose: 2000,
