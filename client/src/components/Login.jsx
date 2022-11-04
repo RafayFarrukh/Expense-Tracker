@@ -31,7 +31,8 @@ const Login = () => {
     }),
     onSubmit: (values) => {
       axios
-        .post("http://localhost:4000/users/login", {
+        // .post("http://localhost:4000/users/login", {
+        .post("/users/login", {
           email: values.email,
           password: values.password,
         })

@@ -33,7 +33,8 @@ const DummyForm2 = () => {
 
         axiosInstance
           .post(
-            "http://localhost:4000/expenses/new",
+            // "http://localhost:4000/expenses/new",
+            "/expenses/new",
             {
               name: values.name,
               amount: values.amount,
