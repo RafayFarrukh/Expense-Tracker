@@ -14,8 +14,10 @@ const Home = () => {
 
   const getData = () => {
     axiosInstance
-      // .get("http://localhost:4000", { headers: { "x-auth-token": token } })
-      .get("/", { headers: { "x-auth-token": token } })
+      // .get("http://localhost:4000/home", {
+      //   headers: { "x-auth-token": token },
+      // })
+      .get("/home", { headers: { "x-auth-token": token } })
       .then((res) => {
         setIncome(res.data.chartData[0]);
         setExpense(res.data.chartData[1]);
