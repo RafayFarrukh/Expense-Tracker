@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/users", userRoutes);
 app.use("/expenses", apiauth, expenseRoutes);
-app.use("/home", apiauth, homeRoutes);
+app.use("/", apiauth, homeRoutes);
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("client/build"));
 // }
