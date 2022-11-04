@@ -85,7 +85,9 @@ const Report = () => {
 
   useEffect(() => {
     axiosInstance
-      .get("/home", { headers: { "x-auth-token": token } })
+      // .get("http://localhost:4000", { headers: { "x-auth-token": token } })
+
+      .get("/", { headers: { "x-auth-token": token } })
       .then((res) => {
         setRowData(res.data.records);
       });

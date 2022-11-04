@@ -6,6 +6,6 @@ const homeController = require("../controllers/home");
 
 // Include authentication middleware
 
-router.get("/home", homeController.getHome);
+router.get("/", homeController.getHome);
 
 module.exports = router;
