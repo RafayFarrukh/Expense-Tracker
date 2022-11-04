@@ -1,12 +1,11 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // Include controllers
-const homeController = require('../controllers/home')
+const homeController = require("../controllers/home");
 
 // Include authentication middleware
 
+router.get("/home", homeController.getHome);
 
-router.get('/',  homeController.getHome)
-
-module.exports = router
+module.exports = router;
