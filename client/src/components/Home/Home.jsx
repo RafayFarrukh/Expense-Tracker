@@ -1,11 +1,12 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import AuthCheck from "../AuthCheck";
 import classes from "./Home.module.css";
 import axiosInstance from "../../services/axiosInstance";
 import DummyForm2 from "../DummyForm2";
 
 const Home = () => {
+  const [submit, setSubmit] = useState(false);
   const [balance, setBalance] = useState(0);
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
@@ -14,10 +15,10 @@ const Home = () => {
 
   const getData = () => {
     axiosInstance
-      // .get("http://localhost:4000/home", {
-      //   headers: { "x-auth-token": token },
-      // })
-      .get("/home", { headers: { "x-auth-token": token } })
+      .get("http://localhost:4000/home", {
+        headers: { "x-auth-token": token },
+      })
+      // .get("/home", { headers: { "x-auth-token": token } })
       .then((res) => {
         setIncome(res.data.chartData[0]);
         setExpense(res.data.chartData[1]);
@@ -29,11 +30,15 @@ const Home = () => {
         console.log(err.message);
       });
   };
-  useEffect(function () {
-    if (token) {
-      getData();
-    }
-  }, []);
+  useEffect(
+    function () {
+      if (token) {
+        getData();
+        setSubmit(false);
+      }
+    },
+    [submit == true]
+  );
 
   return (
     <AuthCheck>
@@ -71,7 +76,7 @@ const Home = () => {
 
             <h3>Add new transaction</h3>
 
-            <DummyForm2 />
+            <DummyForm2 submit={submit} setSubmit={setSubmit} />
           </div>
         </div>
       </>

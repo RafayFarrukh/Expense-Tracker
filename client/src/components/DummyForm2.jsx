@@ -4,8 +4,9 @@ import classes from "./Home/Home.module.css";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import axiosInstance from "../services/axiosInstance";
-
-import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import React, { useState, createContext } from "react";
 import DatePicker from "./DatePicker";
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Description is Required"),
@@ -13,8 +14,7 @@ const validationSchema = Yup.object().shape({
   category: Yup.string().required("Type is Required"),
   date: Yup.date().required("Date is Required"),
 });
-
-const DummyForm2 = () => {
+const DummyForm2 = (props) => {
   const token = localStorage.getItem("Token");
 
   return (
@@ -22,19 +22,18 @@ const DummyForm2 = () => {
       initialValues={{
         name: "",
         amount: "",
-
         category: "",
         date: new Date(),
       }}
       validationSchema={validationSchema}
-      onSubmit={(values) => {
+      onSubmit={(values, { resetForm }) => {
         const user = localStorage.getItem("User");
         const userid = JSON.parse(user);
 
         axiosInstance
           .post(
-            // "http://localhost:4000/expenses/new",
-            "/expenses/new",
+            "http://localhost:4000/expenses/new",
+            // "/expenses/new",
             {
               name: values.name,
               amount: values.amount,
@@ -47,15 +46,34 @@ const DummyForm2 = () => {
           )
 
           .then(() => {
-            window.location.reload();
+            props.setSubmit(true);
+            toast.success("Successfully Created Record", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 2000,
+            });
+
+            // window.location.reload();
           });
+        resetForm({
+          name: "",
+          amount: "",
+          category: "",
+          date: new Date(),
+        });
       }}
     >
       {(props) => {
         const { touched, errors, handleSubmit } = props;
         return (
           <div className={classes.FormContainer}>
-            <form onSubmit={handleSubmit} className={classes.form}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+                props.setSubmit(true);
+              }}
+              className={classes.form}
+            >
               <label htmlFor="name" className={classes.labelfields}>
                 {" "}
                 Description
