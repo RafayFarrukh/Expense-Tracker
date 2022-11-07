@@ -11,7 +11,7 @@ const db = {};
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
-  console.log("SQL connected");
+  console.log("SQL connected hai");
 } else {
   sequelize = new Sequelize(
     config.database,
@@ -19,9 +19,16 @@ if (config.use_env_variable) {
     config.password,
     config
   );
-  console.log("SQL  connected");
+  // console.log("SQL  connected");
 }
-
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("connected..");
+  })
+  .catch((err) => {
+    console.log("Error" + err);
+  });
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (

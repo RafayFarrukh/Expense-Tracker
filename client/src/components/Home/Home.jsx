@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState } from "react";
 import AuthCheck from "../AuthCheck";
 import classes from "./Home.module.css";
 import axiosInstance from "../../services/axiosInstance";
@@ -22,7 +22,7 @@ const Home = () => {
       .then((res) => {
         setIncome(res.data.chartData[0]);
         setExpense(res.data.chartData[1]);
-        console.log(res.data);
+
         setBalance(res.data.totalAmount);
       })
       .catch((err) => {

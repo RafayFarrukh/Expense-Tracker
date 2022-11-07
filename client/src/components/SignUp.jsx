@@ -37,8 +37,8 @@ const Signup = () => {
     }),
     onSubmit: (values) => {
       axios
-        // .post("http://localhost:4000/users/register", {
-        .post("/users/register", {
+        .post("http://localhost:4000/users/register", {
+          // .post("/users/register", {
           name: values.name,
           email: values.email,
           password: values.password,

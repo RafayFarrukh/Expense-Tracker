@@ -1,15 +1,17 @@
 {
   "development": {
     "username": "expense",
-    "password": "qwerty@123",
+    "password": "qwerty@123", 
     "database": "ExpenseTracker",
     "host": "rpm-production.czih5awhgox0.us-east-2.rds.amazonaws.com",
     "dialect": "mssql"
+   
+
   }
-  ,
+  , 
   "test": {
     "username": "expense",
-    "password": "qwerty@123",
+    "password": "qwerty@123", 
     "database": "ExpenseTracker",
     "host": "rpm-production.czih5awhgox0.us-east-2.rds.amazonaws.com",
     "dialect": "mssql",
