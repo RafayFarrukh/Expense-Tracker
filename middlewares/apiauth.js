@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
-const config = require("config");
-const db = require('../models')
-const User = db.User
+const db = require("../models");
+const User = db.User;
 
 async function apiauth(req, res, next) {
   const token = req.header("x-auth-token");
@@ -10,7 +9,7 @@ async function apiauth(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decoded.userID)
+    console.log(decoded.userID);
 
     // const user = await User.findOne(decoded._id).select("-password");
     // if (!user) return res.status(400).send("Invalid token: User Dont exist");

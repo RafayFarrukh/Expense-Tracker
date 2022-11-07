@@ -4,9 +4,14 @@ const fs = require("fs");
 const path = require("path");
 const { Sequelize, DataTypes } = require("sequelize");
 const basename = path.basename(__filename);
+// const config=require()
 const env = process.env.NODE_ENV || "development";
-const config = require("../config/config.json")[env];
+const config = require(__dirname + "/../config/config.json")[env];
+
+// const config = require("../config/config.json")[env];
 const db = {};
+
+// let sequelize;
 
 let sequelize;
 if (config.use_env_variable) {
@@ -29,6 +34,7 @@ sequelize
   .catch((err) => {
     console.log("Error" + err);
   });
+
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (

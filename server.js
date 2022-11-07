@@ -2,8 +2,6 @@ const express = require("express");
 const mysql = require("mysql");
 const app = express();
 const dotenv = require("dotenv");
-const env = process.env.NODE_ENV || "development";
-const config = require("./config/config.json")[env];
 
 const apiauth = require("./middlewares/apiauth");
 const userRoutes = require("./routes/user");
